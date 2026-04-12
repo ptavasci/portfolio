@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, Mail, Check, Shield, ArrowRight } from "lucide-react";
 import { useApp } from "../contexts/AppContext";
@@ -9,10 +10,30 @@ export default function HomePage() {
   const { lang } = useApp();
   const t = translations[lang];
 
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
   return (
     <div className="max-w-5xl mx-auto px-6">
       {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 text-center">
+      <section
+        className="py-20 md:py-28 text-center relative group"
+        onMouseMove={handleMouseMove}
+      >
+        {/* Dynamic Spotlight Hover Effect */}
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+          style={{
+            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 92, 0, 0.07), transparent 40%)`,
+          }}
+        />
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-brand-primary/10 text-brand-primary text-sm font-medium mb-8 border border-orange-100 dark:border-brand-primary/20 animate-fade-in-up">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
@@ -73,14 +94,14 @@ export default function HomePage() {
           <div className="flex-1 h-px bg-zinc-200 dark:bg-border-dark"></div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <ul role="list" className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {skillKeys.map((key) => {
             const Icon = (skillIcons as any)[key];
             const skill = t.skills[key];
             return (
-              <div
+              <li
                 key={key}
-                className="group p-5 rounded-2xl bg-zinc-50 dark:bg-surface-dark/50 border border-zinc-200 dark:border-border-dark hover:border-brand-primary/50 dark:hover:border-brand-primary/50 transition-all duration-300 hover:bg-white dark:hover:bg-surface-dark-hover"
+                className="group p-5 rounded-2xl bg-zinc-50 dark:bg-surface-dark/50 border border-zinc-200 dark:border-border-dark hover:border-brand-primary/50 dark:hover:border-brand-primary/50 transition-all duration-300 hover:bg-white dark:hover:bg-surface-dark-hover hover:shadow-xl hover:shadow-brand-primary/5"
               >
                 <div className="w-12 h-12 rounded-xl bg-orange-50 dark:bg-brand-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 text-brand-primary">
                   <Icon className="w-6 h-6" />
@@ -99,10 +120,10 @@ export default function HomePage() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </section>
 
       {/* ── Projects ──────────────────────────────────────────────────── */}
@@ -114,46 +135,48 @@ export default function HomePage() {
           <div className="flex-1 h-px bg-zinc-200 dark:bg-border-dark"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <ul role="list" className="grid md:grid-cols-2 gap-6">
           {projectsMeta.map((project) => (
-            <Link
-              key={project.name}
-              to={`/project/${project.key}`}
-              className="group relative overflow-hidden rounded-2xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-primary/10 dark:hover:shadow-black/50 hover:-translate-y-1.5 active:scale-[0.98]"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
+            <li key={project.name}>
+              <Link
+                to={`/project/${project.key}`}
+                viewTransition
+                className="block h-full group relative overflow-hidden rounded-2xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-primary/10 dark:hover:shadow-brand-primary/10 hover:-translate-y-1.5 active:scale-[0.98] outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
 
-              <div className="relative">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-orange-50 dark:bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:scale-110 transition-transform duration-300">
-                      <project.icon className="w-5 h-5" />
+                <div className="relative">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-orange-50 dark:bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:scale-110 transition-transform duration-300">
+                        <project.icon className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-2xl font-bold bg-gradient-to-r from-brand-primary to-orange-400 bg-clip-text text-transparent">
+                        {project.name}
+                      </h3>
                     </div>
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-brand-primary to-orange-400 bg-clip-text text-transparent">
-                      {project.name}
-                    </h3>
+                    <div className="text-zinc-400 group-hover:text-brand-primary group-hover:animate-bounce-x transition-colors">
+                      <ArrowRight className="w-5 h-5" />
+                    </div>
                   </div>
-                  <div className="text-zinc-400 group-hover:text-brand-primary group-hover:animate-bounce-x transition-colors">
-                    <ArrowRight className="w-5 h-5" />
+                  <p className="text-zinc-600 dark:text-zinc-400 mb-5 leading-relaxed">
+                    {t.projects[project.key].description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-surface-dark-hover text-zinc-600 dark:text-zinc-300 text-xs font-medium border border-zinc-200 dark:border-border-dark"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                <p className="text-zinc-600 dark:text-zinc-400 mb-5 leading-relaxed">
-                  {t.projects[project.key].description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-surface-dark-hover text-zinc-600 dark:text-zinc-300 text-xs font-medium border border-zinc-200 dark:border-border-dark"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Link>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
       {/* ── Connect ───────────────────────────────────────────────────── */}

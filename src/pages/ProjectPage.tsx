@@ -108,6 +108,9 @@ export default function ProjectPage() {
                 key={src}
                 src={src}
                 alt={`${projectTranslation.title} screenshot ${idx + 1}`}
+                loading={idx === 0 ? "eager" : "lazy"}
+                decoding="async"
+                fetchPriority={idx === 0 ? "high" : "auto"}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
                   idx === currentSlide ? "opacity-100" : "opacity-0"
                 }`}

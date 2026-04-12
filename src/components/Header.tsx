@@ -15,7 +15,7 @@ import Logo from "./Logo.tsx";
 
 export default function Header() {
   const { theme, setTheme, lang, setLang } = useApp();
-  const t: Translations = (translations as any)[lang];
+  const t: Translations = translations[lang];
 
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);

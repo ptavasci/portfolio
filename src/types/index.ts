@@ -5,6 +5,9 @@ import { type LucideIcon } from "lucide-react";
 export type Lang = "es" | "en";
 export type Theme = "light" | "dark" | "system";
 
+export type SkillKey = "architecture" | "infra" | "security" | "leadership";
+export type ProjectKey = "autodata" | "vineteca" | "ajedrez";
+
 /* ─── Context Types ─────────────────────────────────────────────────── */
 
 export interface AppContextValue {
@@ -56,6 +59,9 @@ export interface Translations {
   themeDark: string;
   themeSystem: string;
   contactMe: string;
+  copyEmail: string;
+  emailCopied: string;
+  sendEmail: string;
   footerBio: string;
   footerJoke: string;
   projectStack: string;
@@ -70,9 +76,9 @@ export interface Translations {
   termsTitle: string;
   termsLastUpdated: string;
   termsSections: LegalSection[];
-  skills: Record<string, SkillGroup>;
-  projects: Record<string, ProjectTranslation>;
-  projectPages: Record<string, ProjectPageTranslation>;
+  skills: Record<SkillKey, SkillGroup>;
+  projects: Record<ProjectKey, ProjectTranslation>;
+  projectPages: Record<ProjectKey, ProjectPageTranslation>;
   legalTeasersPool: {
     privacy: string[];
     terms: string[];
@@ -82,7 +88,7 @@ export interface Translations {
 /* ─── Data Types ────────────────────────────────────────────────────── */
 
 export interface ProjectMeta {
-  key: string;
+  key: ProjectKey;
   name: string;
   icon: LucideIcon;
   tags: string[];

@@ -29,6 +29,9 @@ export const translations: Record<Lang, Translations> = {
     themeDark: "Oscuro",
     themeSystem: "Sistema",
     contactMe: "Contacto",
+    copyEmail: "Copiar Email",
+    emailCopied: "¡Copiado!",
+    sendEmail: "Enviar Correo",
     footerBio:
       "Ingeniero de software, padre, apasionado de los autos y la domótica.",
     footerJoke:
@@ -227,6 +230,9 @@ export const translations: Record<Lang, Translations> = {
     themeDark: "Dark",
     themeSystem: "System",
     contactMe: "Contact",
+    copyEmail: "Copy Email",
+    emailCopied: "Copied!",
+    sendEmail: "Send Email",
     footerBio:
       "Software engineer, father, car enthusiast, and home automation nerd.",
     footerJoke:

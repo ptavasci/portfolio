@@ -5,6 +5,7 @@ import { useLegalTypewriter } from "@/hooks/useLegalTypewriter";
 import { useSeo } from "@/hooks/useSeo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ContactModal from "@/components/ContactModal";
 
 /**
  * Root Layout wrapper for the entire application.
@@ -44,6 +45,7 @@ export default function RootLayout() {
         displayText={typewriter.displayText}
       />
 
+      <ContactModal />
       <ScrollRestoration />
     </div>
   );

@@ -85,6 +85,7 @@ export default function Footer({ activeLink, displayText }: FooterProps) {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Visitar mi perfil en ${link.name}`}
                     className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-brand-primary transition-colors flex items-center gap-2"
                   >
                     <link.icon className="w-3.5 h-3.5" />
