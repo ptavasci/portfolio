@@ -5,6 +5,8 @@ import { useApp } from "../contexts/AppContext";
 import { translations } from "../i18n";
 import { skillKeys, skillIcons, projectsMeta, socialLinks } from "../data";
 import { openContact } from "../utils/contact";
+import ScrollReveal from "@/components/ScrollReveal";
+import TiltCard from "@/components/TiltCard";
 
 export default function HomePage() {
   const { lang } = useApp();
@@ -43,7 +45,7 @@ export default function HomePage() {
         </div>
 
         <h1
-          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight animate-fade-in-up opacity-0"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold font-display mb-6 tracking-tight animate-fade-in-up opacity-0"
           style={{ animationDelay: "100ms" }}
         >
           <span className="text-zinc-900 dark:text-white">{t.heroLine1}</span>
@@ -65,20 +67,20 @@ export default function HomePage() {
           className="flex flex-wrap justify-center gap-3 animate-fade-in-up opacity-0"
           style={{ animationDelay: "300ms" }}
         >
-          <span className="px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
+          <span className="px-4 py-2 rounded-lg bg-white/50 backdrop-blur-sm dark:bg-surface-dark/50 text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
             {t.tagArch}
           </span>
-          <span className="px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
+          <span className="px-4 py-2 rounded-lg bg-white/50 backdrop-blur-sm dark:bg-surface-dark/50 text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
             {t.tagDevOps}
           </span>
-          <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
+          <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/50 backdrop-blur-sm dark:bg-surface-dark/50 text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
             <Shield className="w-3.5 h-3.5 text-zinc-400" />
             {t.tagSecurity}
           </span>
-          <span className="px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
+          <span className="px-4 py-2 rounded-lg bg-white/50 backdrop-blur-sm dark:bg-surface-dark/50 text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
             {t.tagLead}
           </span>
-          <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
+          <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/50 backdrop-blur-sm dark:bg-surface-dark/50 text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
             <MapPin className="w-3.5 h-3.5 text-zinc-400" />
             {t.tagLocation}
           </span>
@@ -87,40 +89,44 @@ export default function HomePage() {
 
       {/* ── Skills ────────────────────────────────────────────────────── */}
       <section className="py-16">
-        <div className="flex items-center gap-4 mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white">
-            {t.sectionSkills}
-          </h2>
-          <div className="flex-1 h-px bg-zinc-200 dark:bg-border-dark"></div>
-        </div>
+        <ScrollReveal>
+          <div className="flex items-center gap-4 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold font-display text-zinc-900 dark:text-white">
+              {t.sectionSkills}
+            </h2>
+            <div className="flex-1 h-px bg-zinc-200 dark:bg-border-dark"></div>
+          </div>
+        </ScrollReveal>
 
         <ul role="list" className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {skillKeys.map((key) => {
+          {skillKeys.map((key, index) => {
             const Icon = (skillIcons as any)[key];
             const skill = t.skills[key];
             return (
-              <li
-                key={key}
-                className="group p-5 rounded-2xl bg-zinc-50 dark:bg-surface-dark/50 border border-zinc-200 dark:border-border-dark hover:border-brand-primary/50 dark:hover:border-brand-primary/50 transition-all duration-300 hover:bg-white dark:hover:bg-surface-dark-hover hover:shadow-xl hover:shadow-brand-primary/5"
-              >
-                <div className="w-12 h-12 rounded-xl bg-orange-50 dark:bg-brand-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 text-brand-primary">
-                  <Icon className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-3">
-                  {skill.title}
-                </h3>
-                <ul className="space-y-1.5">
-                  {skill.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-sm text-zinc-600 dark:text-zinc-400 flex items-center gap-2"
-                    >
-                      <Check className="w-3.5 h-3.5 text-brand-primary shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </li>
+              <ScrollReveal key={key} delay={index * 100}>
+                <TiltCard className="h-full">
+                  <div className="group h-full p-5 rounded-2xl bg-white/60 dark:bg-surface-dark/50 backdrop-blur-xl border border-zinc-200 dark:border-border-dark hover:border-brand-primary/50 dark:hover:border-brand-primary/50 transition-all duration-300 hover:bg-white/80 dark:hover:bg-surface-dark-hover/80 hover:shadow-xl hover:shadow-brand-primary/10 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/0 to-brand-primary/0 group-hover:from-brand-primary/5 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl"></div>
+                    <div className="w-12 h-12 rounded-xl bg-orange-50 dark:bg-brand-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 text-brand-primary">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg font-semibold font-display text-zinc-900 dark:text-white mb-3">
+                      {skill.title}
+                    </h3>
+                    <ul className="space-y-1.5">
+                      {skill.items.map((item) => (
+                        <li
+                          key={item}
+                          className="text-sm text-zinc-600 dark:text-zinc-400 flex items-center gap-2"
+                        >
+                          <Check className="w-3.5 h-3.5 text-brand-primary shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </TiltCard>
+              </ScrollReveal>
             );
           })}
         </ul>
@@ -128,86 +134,96 @@ export default function HomePage() {
 
       {/* ── Projects ──────────────────────────────────────────────────── */}
       <section className="py-16">
-        <div className="flex items-center gap-4 mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white">
-            {t.sectionProjects}
-          </h2>
-          <div className="flex-1 h-px bg-zinc-200 dark:bg-border-dark"></div>
-        </div>
+        <ScrollReveal>
+          <div className="flex items-center gap-4 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold font-display text-zinc-900 dark:text-white">
+              {t.sectionProjects}
+            </h2>
+            <div className="flex-1 h-px bg-zinc-200 dark:bg-border-dark"></div>
+          </div>
+        </ScrollReveal>
 
         <ul role="list" className="grid md:grid-cols-2 gap-6">
-          {projectsMeta.map((project) => (
-            <li key={project.name}>
-              <Link
-                to={`/project/${project.key}`}
-                viewTransition
-                className="block h-full group relative overflow-hidden rounded-2xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-primary/10 dark:hover:shadow-brand-primary/10 hover:-translate-y-1.5 active:scale-[0.98] outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
-              >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
+          {projectsMeta.map((project, index) => (
+            <ScrollReveal key={project.name} delay={index * 150}>
+              <TiltCard className="h-full">
+                <Link
+                  to={`/project/${project.key}`}
+                  viewTransition
+                  className="block h-full group relative overflow-hidden rounded-2xl bg-white/60 dark:bg-surface-dark/50 backdrop-blur-xl border border-zinc-200 dark:border-border-dark p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-primary/10 dark:hover:shadow-brand-primary/10 hover:border-brand-primary/30 outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+                >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/0 to-brand-primary/0 group-hover:from-brand-primary/5 group-hover:to-transparent transition-all duration-500 pointer-events-none"></div>
 
-                <div className="relative">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-orange-50 dark:bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:scale-110 transition-transform duration-300">
-                        <project.icon className="w-5 h-5" />
+                  <div className="relative">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-orange-50 dark:bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:scale-110 transition-transform duration-300">
+                          <project.icon className="w-5 h-5" />
+                        </div>
+                        <h3 className="text-2xl font-bold font-display bg-gradient-to-r from-brand-primary to-orange-400 bg-clip-text text-transparent">
+                          {project.name}
+                        </h3>
                       </div>
-                      <h3 className="text-2xl font-bold bg-gradient-to-r from-brand-primary to-orange-400 bg-clip-text text-transparent">
-                        {project.name}
-                      </h3>
+                      <div className="text-zinc-400 group-hover:text-brand-primary group-hover:animate-bounce-x transition-colors">
+                        <ArrowRight className="w-5 h-5" />
+                      </div>
                     </div>
-                    <div className="text-zinc-400 group-hover:text-brand-primary group-hover:animate-bounce-x transition-colors">
-                      <ArrowRight className="w-5 h-5" />
+                    <p className="text-zinc-600 dark:text-zinc-400 mb-5 leading-relaxed">
+                      {t.projects[project.key].description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 rounded-full bg-white/80 dark:bg-surface-dark-hover/80 backdrop-blur-sm text-zinc-600 dark:text-zinc-300 text-xs font-medium border border-zinc-200 dark:border-border-dark"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-5 leading-relaxed">
-                    {t.projects[project.key].description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-surface-dark-hover text-zinc-600 dark:text-zinc-300 text-xs font-medium border border-zinc-200 dark:border-border-dark"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Link>
-            </li>
+                </Link>
+              </TiltCard>
+            </ScrollReveal>
           ))}
         </ul>
       </section>
 
       {/* ── Connect ───────────────────────────────────────────────────── */}
       <section className="py-16">
-        <div className="flex items-center gap-4 mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white">
-            {t.sectionConnect}
-          </h2>
-          <div className="flex-1 h-px bg-zinc-200 dark:bg-border-dark"></div>
-        </div>
+        <ScrollReveal>
+          <div className="flex items-center gap-4 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold font-display text-zinc-900 dark:text-white">
+              {t.sectionConnect}
+            </h2>
+            <div className="flex-1 h-px bg-zinc-200 dark:bg-border-dark"></div>
+          </div>
+        </ScrollReveal>
 
         <div className="flex flex-wrap gap-4">
-          {socialLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-6 py-4 rounded-xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:bg-orange-50 dark:hover:bg-brand-primary/10 hover:border-brand-primary/50 dark:hover:border-brand-primary/50 hover:text-brand-primary hover:shadow-lg hover:shadow-brand-primary/5 active:scale-95"
-            >
-              <link.icon className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
-              <span className="font-medium">{link.name}</span>
-            </a>
+          {socialLinks.map((link, index) => (
+            <ScrollReveal key={link.name} delay={index * 100}>
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 px-6 py-4 rounded-xl bg-white/60 dark:bg-surface-dark/50 backdrop-blur-xl border border-zinc-200 dark:border-border-dark text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:bg-orange-50/80 dark:hover:bg-brand-primary/10 hover:border-brand-primary/50 dark:hover:border-brand-primary/50 hover:text-brand-primary hover:shadow-lg hover:shadow-brand-primary/5 active:scale-95"
+              >
+                <link.icon className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
+                <span className="font-medium font-display">{link.name}</span>
+              </a>
+            </ScrollReveal>
           ))}
-          <button
-            onClick={openContact}
-            className="group flex items-center gap-3 px-6 py-4 rounded-xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:bg-orange-50 dark:hover:bg-brand-primary/10 hover:border-brand-primary/50 dark:hover:border-brand-primary/50 hover:text-brand-primary hover:shadow-lg hover:shadow-brand-primary/5 cursor-pointer active:scale-95"
-          >
-            <Mail className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
-            <span className="font-medium">{t.contactMe}</span>
-          </button>
+          <ScrollReveal delay={socialLinks.length * 100}>
+            <button
+              onClick={openContact}
+              className="group flex items-center gap-3 px-6 py-4 rounded-xl bg-brand-primary text-white border border-transparent shadow-lg shadow-brand-primary/25 transition-all duration-300 hover:bg-brand-hover hover:shadow-xl hover:shadow-brand-primary/40 cursor-pointer active:scale-95"
+            >
+              <Mail className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
+              <span className="font-medium font-display">{t.contactMe}</span>
+            </button>
+          </ScrollReveal>
         </div>
       </section>
     </div>
