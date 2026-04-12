@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { Mail } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { useLegalTypewriter } from "@/hooks/useLegalTypewriter";
 import { useApp } from "../contexts/AppContext";
 import { translations } from "../i18n";
 import { socialLinks } from "../data";
@@ -7,21 +7,53 @@ import { openContact } from "../utils/contact";
 import Logo from "./Logo.tsx";
 import LegalLink from "./LegalLink.tsx";
 
+import { Link } from "react-router-dom";
+import { Mail } from "lucide-react";
+
 interface FooterProps {
-  activeLink: "privacy" | "terms" | null;
-  displayText: string;
+  // Props removed in favor of internal logic isolation
 }
 
 /**
  * Modernized Footer with stable layout geometry.
  * Anchored Legal column width prevents jitter during typewriter animations.
  */
-export default function Footer({ activeLink, displayText }: FooterProps) {
+export default function Footer({}: FooterProps) {
   const { lang } = useApp();
   const t = translations[lang];
 
+  const [isVisible, setIsVisible] = useState(false);
+  const footerRef = useRef<HTMLElement>(null);
+  const typewriter = useLegalTypewriter(lang, isVisible);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
+      },
+      {
+        root: document.getElementById("scroll-container"),
+        threshold: 0,
+      },
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <footer className="border-t border-zinc-200 dark:border-border-dark mt-8 bg-zinc-50/50 dark:bg-surface-dark/30">
+    <footer
+      ref={footerRef}
+      className="border-t border-zinc-200 dark:border-border-dark mt-8 bg-zinc-50/50 dark:bg-surface-dark/30 snap-section"
+      style={{ overflowAnchor: "none" }}
+    >
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.5fr] gap-x-12 gap-y-10 mb-10 items-start">
           {/* Brand Column */}
@@ -114,18 +146,22 @@ export default function Footer({ activeLink, displayText }: FooterProps) {
               <li>
                 <LegalLink
                   to="/privacy"
-                  active={activeLink === "privacy"}
+                  active={typewriter.activeLink === "privacy"}
                   displayText={
-                    activeLink === "privacy" ? displayText : t.privacyTitle
+                    typewriter.activeLink === "privacy"
+                      ? typewriter.displayText
+                      : t.privacyTitle
                   }
                 />
               </li>
               <li>
                 <LegalLink
                   to="/terms"
-                  active={activeLink === "terms"}
+                  active={typewriter.activeLink === "terms"}
                   displayText={
-                    activeLink === "terms" ? displayText : t.termsTitle
+                    typewriter.activeLink === "terms"
+                      ? typewriter.displayText
+                      : t.termsTitle
                   }
                 />
               </li>

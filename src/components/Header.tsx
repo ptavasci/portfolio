@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Sun,
   Moon,
@@ -16,6 +16,8 @@ import Logo from "./Logo.tsx";
 export default function Header() {
   const { theme, setTheme, lang, setLang } = useApp();
   const t: Translations = translations[lang];
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -86,7 +88,9 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 dark:bg-bg-dark/80 backdrop-blur-xl border-b border-zinc-200 dark:border-border-dark">
+    <header
+      className={`${isHomePage ? "sticky lg:fixed" : "sticky"} top-0 w-full z-50 bg-white/80 dark:bg-bg-dark/80 backdrop-blur-xl border-b border-zinc-200 dark:border-border-dark`}
+    >
       <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-3 group">
           <Logo

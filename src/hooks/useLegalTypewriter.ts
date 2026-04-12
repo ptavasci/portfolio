@@ -6,7 +6,7 @@ import { type Lang } from "../types";
  * Custom hook to manage the "easter egg" typewriter animation in the footer.
  * Cycles through humorous teasers for Privacy and Terms pages.
  */
-export function useLegalTypewriter(lang: Lang) {
+export function useLegalTypewriter(lang: Lang, enabled: boolean = true) {
   const [activeLink, setActiveLink] = useState<"privacy" | "terms" | null>(
     null,
   );
@@ -14,6 +14,8 @@ export function useLegalTypewriter(lang: Lang) {
   const t = translations[lang];
 
   useEffect(() => {
+    if (!enabled) return;
+
     let isMounted = true;
     let timeoutId: number;
     let currentIndex = 0;
@@ -75,7 +77,7 @@ export function useLegalTypewriter(lang: Lang) {
       isMounted = false;
       clearTimeout(timeoutId);
     };
-  }, [lang, t.legalTeasersPool]);
+  }, [lang, t.legalTeasersPool, enabled]);
 
   return { activeLink, displayText };
 }

@@ -1,7 +1,6 @@
-import { Suspense } from "react";
+import { useState, useRef, Suspense } from "react";
 import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import { useApp } from "@/contexts/AppContext";
-import { useLegalTypewriter } from "@/hooks/useLegalTypewriter";
 import { useSeo } from "@/hooks/useSeo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,25 +8,26 @@ import ContactModal from "@/components/ContactModal";
 import PageSkeleton from "@/components/PageSkeleton";
 import SkipNav from "@/components/SkipNav";
 import CinematicLoader from "@/components/CinematicLoader";
-import { useState } from "react";
 
 export default function RootLayout() {
   const { lang } = useApp();
   const location = useLocation();
-  const typewriter = useLegalTypewriter(lang);
   const [showLoader, setShowLoader] = useState(true);
-
-  const isHomePage = location.pathname === "/";
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Activate Dynamic SEO Titles
   useSeo(lang);
+
+  const isHomePage = location.pathname === "/";
 
   return (
     <>
       <CinematicLoader onFinish={() => setShowLoader(false)} />
       <div
-        className={`min-h-screen bg-white dark:bg-bg-dark flex flex-col font-sans transition-opacity duration-1000 selection:bg-brand-primary/20 selection:text-brand-primary ${
-          showLoader ? "opacity-0 overflow-hidden" : "opacity-100"
+        ref={scrollContainerRef}
+        id="scroll-container"
+        className={`min-h-screen bg-white dark:bg-bg-dark flex flex-col font-sans transition-opacity duration-1000 selection:bg-brand-primary/20 selection:text-brand-primary [overflow-anchor:none] ${
+          showLoader ? "opacity-0 pointer-events-none" : "opacity-100"
         } ${
           isHomePage
             ? "lg:h-screen lg:overflow-y-auto snap-y-mandatory scroll-smooth"
@@ -58,10 +58,7 @@ export default function RootLayout() {
         </main>
 
         <div className={isHomePage ? "snap-section" : ""}>
-          <Footer
-            activeLink={typewriter.activeLink}
-            displayText={typewriter.displayText}
-          />
+          <Footer />
         </div>
 
         <ContactModal />

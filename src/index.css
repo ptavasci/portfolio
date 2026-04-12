@@ -106,12 +106,12 @@ body {
 
 /* Scroll Snap Utilities (Desktop Only) */
 @media (min-width: 1024px) {
-  .snap-y-mandatory {
+  #scroll-container {
     scroll-snap-type: y mandatory;
   }
 
   .snap-section {
-    scroll-snap-align: center;
+    scroll-snap-align: start;
     scroll-snap-stop: always;
   }
 }

@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
 import { useNavigationType, NavigationType } from "react-router-dom";
 import { MapPin, Mail, Check, Shield } from "lucide-react";
 import { useApp } from "../contexts/AppContext";
@@ -12,23 +12,32 @@ export default function HomePage() {
   const { lang } = useApp();
   const t = translations[lang];
   const navType = useNavigationType();
+  const isFirstMount = useRef(true);
 
-  // Force scroll to top on mount ONLY for fresh entries (PUSH/REPLACE).
-  // This ensures a Cinematic Hero start for new visits while allowing
-  // history-based ScrollRestoration for "Back" button navigations (POP).
+  // Force scroll to top on mount ONLY for fresh entries (PUSH/REPLACE) OR the very first load (F5).
+  // React Router logs F5 reloads as POP. We must bypass the POP check on first mount to defeat F5 restoring scroll.
   useLayoutEffect(() => {
-    // Only force top on new navigations. POP navigations should restore scroll.
-    if (navType === NavigationType.Pop) return;
+    const isFirst = isFirstMount.current;
+    if (isFirst) {
+      isFirstMount.current = false;
+    } else if (navType === NavigationType.Pop) {
+      // Only respect POP scroll restoration for subsequent In-App Back navigations
+      return;
+    }
 
-    const scrollContainer = document.querySelector(".snap-y-mandatory");
+    // Use absolute ID to ensure we grab it regardless of snap classes
+    const scrollContainer = document.getElementById("scroll-container");
     if (!scrollContainer) return;
 
-    // Immediate reset
+    // Disable smooth scroll temporarily for instant jump
+    const prevBehavior = scrollContainer.style.scrollBehavior;
+    scrollContainer.style.scrollBehavior = "auto";
     scrollContainer.scrollTop = 0;
 
     // Fallback for when the browser is extra aggressive with initial paints
     const handle = requestAnimationFrame(() => {
       scrollContainer.scrollTop = 0;
+      scrollContainer.style.scrollBehavior = prevBehavior;
     });
 
     return () => cancelAnimationFrame(handle);
@@ -48,7 +57,7 @@ export default function HomePage() {
     <div className="max-w-5xl mx-auto px-6">
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section
-        className="min-h-[80vh] lg:min-h-screen flex flex-col justify-center items-center text-center relative group snap-section overflow-hidden"
+        className="min-h-[80vh] lg:min-h-screen pt-20 lg:pt-0 flex flex-col justify-center items-center text-center relative group snap-section overflow-hidden"
         onMouseMove={handleMouseMove}
       >
         {/* Dynamic Spotlight Hover Effect */}
