@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { ChevronLeft, Sparkles, Building2, Globe } from "lucide-react";
 import { useApp } from "../contexts/AppContext";
 import { translations } from "../i18n";
@@ -10,7 +10,17 @@ import TiltCard from "@/components/TiltCard";
 export default function SpecialtyPage() {
   const { id } = useParams<{ id: string }>();
   const { lang } = useApp();
+  const navigate = useNavigate();
   const t = translations[lang];
+
+  const handleBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
 
   const specialty = id ? (t.specialtyPages as any)[id] : null;
 
@@ -20,9 +30,12 @@ export default function SpecialtyPage() {
         <p className="text-zinc-500 dark:text-zinc-400 mb-4">
           {lang === "es" ? "Especialidad no encontrada" : "Specialty not found"}
         </p>
-        <Link to="/" className="text-brand-primary hover:underline">
+        <button
+          onClick={handleBack}
+          className="text-brand-primary hover:underline cursor-pointer"
+        >
           &larr; {t.backToHome}
-        </Link>
+        </button>
       </div>
     );
   }
@@ -39,14 +52,13 @@ export default function SpecialtyPage() {
       ></div>
 
       <div className="flex items-center justify-between mb-10 relative">
-        <Link
-          to="/"
-          viewTransition
-          className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 hover:text-brand-primary transition-colors text-sm"
+        <button
+          onClick={handleBack}
+          className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 hover:text-brand-primary transition-colors text-sm cursor-pointer"
         >
           <ChevronLeft className="w-4 h-4" />
           {t.sectionSkills}
-        </Link>
+        </button>
       </div>
 
       <ScrollReveal>

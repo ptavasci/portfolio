@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   ExternalLink,
   ChevronLeft,
@@ -14,7 +14,17 @@ import { projectsMeta } from "../data";
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
   const { lang } = useApp();
+  const navigate = useNavigate();
   const t = translations[lang];
+
+  const handleBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -52,13 +62,12 @@ export default function ProjectPage() {
         <p className="text-zinc-500 dark:text-zinc-400 mb-4">
           {lang === "es" ? "Proyecto no encontrado" : "Project not found"}
         </p>
-        <Link
-          to="/"
-          viewTransition
-          className="text-brand-primary hover:underline"
+        <button
+          onClick={handleBack}
+          className="text-brand-primary hover:underline cursor-pointer"
         >
           &larr; {t.backToHome}
-        </Link>
+        </button>
       </div>
     );
   }
@@ -68,14 +77,13 @@ export default function ProjectPage() {
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
       <div className="flex items-center justify-between mb-10">
-        <Link
-          to="/"
-          viewTransition
-          className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 hover:text-brand-primary transition-colors text-sm"
+        <button
+          onClick={handleBack}
+          className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 hover:text-brand-primary transition-colors text-sm cursor-pointer"
         >
           <ChevronLeft className="w-4 h-4" />
           {t.sectionProjects}
-        </Link>
+        </button>
         {project.url !== "#" && (
           <a
             href={project.url}

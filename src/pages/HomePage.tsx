@@ -1,4 +1,5 @@
 import { useState, useLayoutEffect } from "react";
+import { useNavigationType, NavigationType } from "react-router-dom";
 import { MapPin, Mail, Check, Shield } from "lucide-react";
 import { useApp } from "../contexts/AppContext";
 import { translations } from "../i18n";
@@ -10,10 +11,15 @@ import PremiumCard from "@/components/PremiumCard";
 export default function HomePage() {
   const { lang } = useApp();
   const t = translations[lang];
+  const navType = useNavigationType();
 
-  // Force scroll to top on mount to ensure the first snap (Hero) is correctly aligned.
-  // This works in tandem with the global 'manual' scrollRestoration in main.tsx.
+  // Force scroll to top on mount ONLY for fresh entries (PUSH/REPLACE).
+  // This ensures a Cinematic Hero start for new visits while allowing
+  // history-based ScrollRestoration for "Back" button navigations (POP).
   useLayoutEffect(() => {
+    // Only force top on new navigations. POP navigations should restore scroll.
+    if (navType === NavigationType.Pop) return;
+
     const scrollContainer = document.querySelector(".snap-y-mandatory");
     if (!scrollContainer) return;
 
@@ -26,7 +32,7 @@ export default function HomePage() {
     });
 
     return () => cancelAnimationFrame(handle);
-  }, []);
+  }, [navType]);
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
