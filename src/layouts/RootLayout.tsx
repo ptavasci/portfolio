@@ -58,7 +58,7 @@ export default function RootLayout() {
       </div>
 
       <ContactModal />
-      <ScrollRestoration />
+      {!isHomePage && <ScrollRestoration />}
     </div>
   );
 }

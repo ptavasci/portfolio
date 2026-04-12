@@ -1,5 +1,10 @@
 import { StrictMode, lazy } from "react";
 import { createRoot } from "react-dom/client";
+
+// Early disable of native scroll restoration to prevent flicker in chromium browsers
+if (typeof window !== "undefined") {
+  window.history.scrollRestoration = "manual";
+}
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { AppProvider } from "@/contexts/AppContext";

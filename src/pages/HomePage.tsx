@@ -12,26 +12,20 @@ export default function HomePage() {
   const t = translations[lang];
 
   // Force scroll to top on mount to ensure the first snap (Hero) is correctly aligned.
-  // We use requestAnimationFrame to ensure the browser has finished layout/snap calculations.
+  // This works in tandem with the global 'manual' scrollRestoration in main.tsx.
   useLayoutEffect(() => {
-    // Disable native scroll restoration to prevent the "jump" on refresh
-    const originalRestoration = window.history.scrollRestoration;
-    window.history.scrollRestoration = "manual";
-
     const scrollContainer = document.querySelector(".snap-y-mandatory");
-    if (scrollContainer) {
-      scrollContainer.scrollTop = 0;
-    }
+    if (!scrollContainer) return;
 
-    // Second attempt after layout stabilizes
+    // Immediate reset
+    scrollContainer.scrollTop = 0;
+
+    // Fallback for when the browser is extra aggressive with initial paints
     const handle = requestAnimationFrame(() => {
-      if (scrollContainer) scrollContainer.scrollTop = 0;
+      scrollContainer.scrollTop = 0;
     });
 
-    return () => {
-      window.history.scrollRestoration = originalRestoration;
-      cancelAnimationFrame(handle);
-    };
+    return () => cancelAnimationFrame(handle);
   }, []);
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
