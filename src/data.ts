@@ -92,11 +92,22 @@ export const projectsMeta: ProjectMeta[] = [
 /* ─── Social links ────────────────────────────────────────────────────── */
 
 export const socialLinks = [
-  { name: "GitHub", url: "https://github.com/ptavasci/", icon: GitHubIcon },
+  {
+    name: "GitHub",
+    url: "https://github.com/ptavasci/",
+    icon: GitHubIcon,
+    accentColor: "#24292f",
+  },
   {
     name: "Instagram",
     url: "https://www.instagram.com/ptavasci",
     icon: InstagramIcon,
+    accentColor: "#E1306C",
   },
-  { name: "X", url: "https://x.com/ptavasci", icon: XIcon },
+  {
+    name: "X",
+    url: "https://x.com/ptavasci",
+    icon: XIcon,
+    accentColor: "#0ea5e9", // A vibrant light blue match for X/Sky
+  },
 ];

@@ -4,12 +4,16 @@ interface ScrollRevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
+  duration?: number;
+  distance?: number;
 }
 
 export default function ScrollReveal({
   children,
   className = "",
   delay = 0,
+  duration = 700,
+  distance = 32,
 }: ScrollRevealProps) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -39,9 +43,13 @@ export default function ScrollReveal({
   return (
     <div
       ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-out ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      style={{
+        transitionDelay: `${delay}ms`,
+        transitionDuration: `${duration}ms`,
+        transform: isVisible ? "translateY(0)" : `translateY(${distance}px)`,
+      }}
+      className={`transition-all ease-out ${
+        isVisible ? "opacity-100" : "opacity-0"
       } ${className}`}
     >
       {children}

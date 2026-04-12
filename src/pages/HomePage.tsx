@@ -1,16 +1,32 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { MapPin, Mail, Check, Shield, ArrowRight } from "lucide-react";
+import { useState, useLayoutEffect } from "react";
+import { MapPin, Mail, Check, Shield } from "lucide-react";
 import { useApp } from "../contexts/AppContext";
 import { translations } from "../i18n";
 import { skillKeys, skillIcons, projectsMeta, socialLinks } from "../data";
 import { openContact } from "../utils/contact";
 import ScrollReveal from "@/components/ScrollReveal";
-import TiltCard from "@/components/TiltCard";
+import PremiumCard from "@/components/PremiumCard";
 
 export default function HomePage() {
   const { lang } = useApp();
   const t = translations[lang];
+
+  // Force scroll to top on mount to ensure the first snap (Hero) is correctly aligned.
+  // We use requestAnimationFrame to ensure the browser has finished layout/snap calculations.
+  useLayoutEffect(() => {
+    const scrollContainer = document.querySelector(".snap-y-mandatory");
+    if (!scrollContainer) return;
+
+    // First attempt
+    scrollContainer.scrollTop = 0;
+
+    // Second attempt after layout stabilizes
+    const handle = requestAnimationFrame(() => {
+      scrollContainer.scrollTop = 0;
+    });
+
+    return () => cancelAnimationFrame(handle);
+  }, []);
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -26,7 +42,7 @@ export default function HomePage() {
     <div className="max-w-5xl mx-auto px-6">
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section
-        className="py-20 md:py-28 text-center relative group"
+        className="min-h-[80vh] lg:min-h-screen flex flex-col justify-center items-center text-center relative group snap-section overflow-hidden"
         onMouseMove={handleMouseMove}
       >
         {/* Dynamic Spotlight Hover Effect */}
@@ -36,7 +52,7 @@ export default function HomePage() {
             background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 92, 0, 0.07), transparent 40%)`,
           }}
         />
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-brand-primary/10 text-brand-primary text-sm font-medium mb-8 border border-orange-100 dark:border-brand-primary/20 animate-fade-in-up">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-brand-primary/10 text-brand-primary text-sm font-medium mt-4 sm:mt-0 mb-8 border border-orange-100 dark:border-brand-primary/20 animate-fade-in-up">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"></span>
@@ -64,7 +80,7 @@ export default function HomePage() {
         </p>
 
         <div
-          className="flex flex-wrap justify-center gap-3 animate-fade-in-up opacity-0"
+          className="flex flex-wrap justify-center gap-3 animate-fade-in-up opacity-0 mb-12"
           style={{ animationDelay: "300ms" }}
         >
           <span className="px-4 py-2 rounded-lg bg-white/50 backdrop-blur-sm dark:bg-surface-dark/50 text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
@@ -85,146 +101,195 @@ export default function HomePage() {
             {t.tagLocation}
           </span>
         </div>
+
+        {/* Premium Mouse Pill Indicator */}
+        <button
+          onClick={() =>
+            document
+              .getElementById("skills-section")
+              ?.scrollIntoView({ behavior: "smooth" })
+          }
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-3 transition-opacity duration-300 hover:opacity-100 opacity-60 group/mouse"
+        >
+          <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400 group-hover/mouse:text-brand-primary transition-colors">
+            {t.heroScroll || "Explore"}
+          </span>
+          <div className="w-[26px] h-[42px] rounded-full border-2 border-zinc-400/30 group-hover/mouse:border-brand-primary/50 transition-colors flex justify-center p-1.5 relative bg-white/5 dark:bg-transparent backdrop-blur-sm">
+            <div className="w-1 h-3 rounded-full bg-brand-primary absolute left-1/2 top-2 animate-mouse-scroll" />
+          </div>
+        </button>
       </section>
 
       {/* ── Skills ────────────────────────────────────────────────────── */}
-      <section className="py-16">
-        <ScrollReveal>
-          <div className="flex items-center gap-4 mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold font-display text-zinc-900 dark:text-white">
+      <section
+        id="skills-section"
+        className="py-12 lg:py-24 snap-section lg:min-h-screen flex flex-col justify-center"
+      >
+        <ScrollReveal duration={1000} distance={50}>
+          <div className="flex items-center gap-4 mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-zinc-900 dark:text-white">
               {t.sectionSkills}
             </h2>
             <div className="flex-1 h-px bg-zinc-200 dark:bg-border-dark"></div>
           </div>
-        </ScrollReveal>
 
-        <ul role="list" className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {skillKeys.map((key, index) => {
-            const Icon = (skillIcons as any)[key];
-            const skill = t.skills[key];
-            return (
-              <ScrollReveal key={key} delay={index * 100}>
-                <TiltCard className="h-full">
-                  <div className="group h-full p-5 rounded-2xl bg-white/60 dark:bg-surface-dark/50 backdrop-blur-xl border border-zinc-200 dark:border-border-dark hover:border-brand-primary/50 dark:hover:border-brand-primary/50 transition-all duration-300 hover:bg-white/80 dark:hover:bg-surface-dark-hover/80 hover:shadow-xl hover:shadow-brand-primary/10 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/0 to-brand-primary/0 group-hover:from-brand-primary/5 group-hover:to-transparent transition-all duration-500 pointer-events-none rounded-2xl"></div>
-                    <div className="w-12 h-12 rounded-xl bg-orange-50 dark:bg-brand-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 text-brand-primary">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-lg font-semibold font-display text-zinc-900 dark:text-white mb-3">
-                      {skill.title}
-                    </h3>
-                    <ul className="space-y-1.5">
-                      {skill.items.map((item) => (
-                        <li
-                          key={item}
-                          className="text-sm text-zinc-600 dark:text-zinc-400 flex items-center gap-2"
-                        >
-                          <Check className="w-3.5 h-3.5 text-brand-primary shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </TiltCard>
-              </ScrollReveal>
-            );
-          })}
-        </ul>
+          <ul role="list" className="grid md:grid-cols-2 gap-8">
+            {skillKeys.map((key, index) => {
+              const Icon = (skillIcons as any)[key];
+              const skill = t.skills[key];
+              const specialty = (t.specialtyPages as any)[key];
+              const accentColor = specialty?.accentColor;
+
+              return (
+                <PremiumCard
+                  key={key}
+                  icon={Icon}
+                  title={skill.title}
+                  to={`/specialty/${key}`}
+                  accentColor={accentColor}
+                  delay={index * 150}
+                >
+                  <ul className="space-y-3 mb-2">
+                    {skill.items.map((item) => (
+                      <li
+                        key={item}
+                        className="text-base text-zinc-600 dark:text-zinc-400 flex items-center gap-3"
+                      >
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 bg-zinc-100 dark:bg-zinc-800">
+                          <Check className="w-3.5 h-3.5 text-brand-primary" />
+                        </div>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </PremiumCard>
+              );
+            })}
+          </ul>
+        </ScrollReveal>
       </section>
 
       {/* ── Projects ──────────────────────────────────────────────────── */}
-      <section className="py-16">
-        <ScrollReveal>
-          <div className="flex items-center gap-4 mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold font-display text-zinc-900 dark:text-white">
+      <section className="py-12 lg:py-24 snap-section lg:min-h-screen flex flex-col justify-center">
+        <ScrollReveal duration={1000} distance={50}>
+          <div className="flex items-center gap-4 mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-zinc-900 dark:text-white">
               {t.sectionProjects}
             </h2>
             <div className="flex-1 h-px bg-zinc-200 dark:bg-border-dark"></div>
           </div>
-        </ScrollReveal>
 
-        <ul role="list" className="grid md:grid-cols-2 gap-6">
-          {projectsMeta.map((project, index) => (
-            <ScrollReveal key={project.name} delay={index * 150}>
-              <TiltCard className="h-full">
-                <Link
-                  to={`/project/${project.key}`}
-                  viewTransition
-                  className="block h-full group relative overflow-hidden rounded-2xl bg-white/60 dark:bg-surface-dark/50 backdrop-blur-xl border border-zinc-200 dark:border-border-dark p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-primary/10 dark:hover:shadow-brand-primary/10 hover:border-brand-primary/30 outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
-                >
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/0 to-brand-primary/0 group-hover:from-brand-primary/5 group-hover:to-transparent transition-all duration-500 pointer-events-none"></div>
-
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-orange-50 dark:bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:scale-110 transition-transform duration-300">
-                          <project.icon className="w-5 h-5" />
-                        </div>
-                        <h3 className="text-2xl font-bold font-display bg-gradient-to-r from-brand-primary to-orange-400 bg-clip-text text-transparent">
-                          {project.name}
-                        </h3>
-                      </div>
-                      <div className="text-zinc-400 group-hover:text-brand-primary group-hover:animate-bounce-x transition-colors">
-                        <ArrowRight className="w-5 h-5" />
-                      </div>
-                    </div>
-                    <p className="text-zinc-600 dark:text-zinc-400 mb-5 leading-relaxed">
-                      {t.projects[project.key].description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 rounded-full bg-white/80 dark:bg-surface-dark-hover/80 backdrop-blur-sm text-zinc-600 dark:text-zinc-300 text-xs font-medium border border-zinc-200 dark:border-border-dark"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+          <ul role="list" className="grid md:grid-cols-2 gap-8">
+            {projectsMeta.map((project, index) => (
+              <PremiumCard
+                key={project.name}
+                icon={project.icon}
+                title={project.name}
+                to={`/project/${project.key}`}
+                delay={index * 150}
+              >
+                <div>
+                  <p className="text-zinc-600 dark:text-zinc-400 mb-5 leading-relaxed">
+                    {t.projects[project.key].description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 rounded-full bg-white/80 dark:bg-surface-dark-hover/80 backdrop-blur-sm text-zinc-600 dark:text-zinc-300 text-xs font-medium border border-zinc-200 dark:border-border-dark"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                </Link>
-              </TiltCard>
-            </ScrollReveal>
-          ))}
-        </ul>
+                </div>
+              </PremiumCard>
+            ))}
+          </ul>
+        </ScrollReveal>
       </section>
 
       {/* ── Connect ───────────────────────────────────────────────────── */}
-      <section className="py-16">
-        <ScrollReveal>
-          <div className="flex items-center gap-4 mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold font-display text-zinc-900 dark:text-white">
+      <section className="py-12 lg:py-24 snap-section lg:min-h-screen flex flex-col justify-center relative overflow-hidden">
+        {/* Section-Specific Connect Aura */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-brand-primary/5 blur-[120px] rounded-full -z-10 animate-pulse opacity-50"></div>
+
+        <ScrollReveal duration={1000} distance={50}>
+          <div className="flex items-center gap-4 mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-zinc-900 dark:text-white">
               {t.sectionConnect}
             </h2>
             <div className="flex-1 h-px bg-zinc-200 dark:bg-border-dark"></div>
           </div>
-        </ScrollReveal>
 
-        <div className="flex flex-wrap gap-4">
-          {socialLinks.map((link, index) => (
-            <ScrollReveal key={link.name} delay={index * 100}>
-              <a
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-3 px-6 py-4 rounded-xl bg-white/60 dark:bg-surface-dark/50 backdrop-blur-xl border border-zinc-200 dark:border-border-dark text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:bg-orange-50/80 dark:hover:bg-brand-primary/10 hover:border-brand-primary/50 dark:hover:border-brand-primary/50 hover:text-brand-primary hover:shadow-lg hover:shadow-brand-primary/5 active:scale-95"
+          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center">
+            {/* Left Column: The Big CTA */}
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h3 className="text-4xl lg:text-6xl font-bold font-display text-zinc-900 dark:text-white tracking-tight leading-[1.1]">
+                  {t.connectHeadline}
+                </h3>
+                <p className="text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl">
+                  {t.connectSubline}
+                </p>
+              </div>
+
+              <button
+                onClick={openContact}
+                className="group relative flex items-center justify-center gap-4 px-10 py-6 rounded-2xl bg-brand-primary text-white text-xl font-bold font-display shadow-2xl shadow-brand-primary/40 overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-brand-primary/60 cursor-pointer active:scale-95 w-full lg:w-max"
               >
-                <link.icon className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
-                <span className="font-medium font-display">{link.name}</span>
-              </a>
-            </ScrollReveal>
-          ))}
-          <ScrollReveal delay={socialLinks.length * 100}>
-            <button
-              onClick={openContact}
-              className="group flex items-center gap-3 px-6 py-4 rounded-xl bg-brand-primary text-white border border-transparent shadow-lg shadow-brand-primary/25 transition-all duration-300 hover:bg-brand-hover hover:shadow-xl hover:shadow-brand-primary/40 cursor-pointer active:scale-95"
-            >
-              <Mail className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
-              <span className="font-medium font-display">{t.contactMe}</span>
-            </button>
-          </ScrollReveal>
-        </div>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                <Mail className="w-6 h-6 transition-transform duration-300 group-hover:-rotate-12" />
+                <span>{t.contactMe}</span>
+              </button>
+            </div>
+
+            {/* Right Column: Social Grid */}
+            <div className="grid grid-cols-3 gap-2 lg:gap-4">
+              {socialLinks.map((link, index) => (
+                <ScrollReveal
+                  key={link.name}
+                  delay={index * 100}
+                  duration={800}
+                  distance={30}
+                >
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col items-center justify-center gap-2 lg:gap-4 p-3 lg:p-8 rounded-2xl bg-white/40 dark:bg-surface-dark/40 backdrop-blur-md border border-zinc-200 dark:border-border-dark text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:shadow-xl active:scale-95"
+                    style={
+                      {
+                        "--link-accent": link.accentColor,
+                      } as React.CSSProperties
+                    }
+                  >
+                    <div className="w-8 h-8 lg:w-12 lg:h-12 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+                      <link.icon className="w-full h-full text-zinc-400 group-hover:text-[color:var(--link-accent)] transition-colors duration-300" />
+                    </div>
+                    <div className="text-center">
+                      <span className="block font-bold font-display text-xs sm:text-base lg:text-lg group-hover:text-[color:var(--link-accent)] transition-colors">
+                        {link.name}
+                      </span>
+                      <span className="hidden lg:block text-[10px] text-zinc-500 font-medium tracking-wider uppercase mt-1 opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 text-nowrap">
+                        @ptavasci
+                      </span>
+                    </div>
+
+                    {/* Aura Glow Effect */}
+                    <style>{`
+                        .group:hover {
+                          border-color: var(--link-accent);
+                          background-color: color-mix(in srgb, var(--link-accent) 8%, transparent);
+                          box-shadow: 0 20px 25px -5px color-mix(in srgb, var(--link-accent) 15%, transparent);
+                        }
+                      `}</style>
+                  </a>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
     </div>
   );

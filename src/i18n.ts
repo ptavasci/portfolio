@@ -25,6 +25,10 @@ export const translations: Record<Lang, Translations> = {
     sectionSkills: "Especialidades",
     sectionProjects: "Proyectos",
     sectionConnect: "Conectar",
+    heroScroll: "Explorar Especialidades",
+    connectHeadline: "Hablemos de ingeniería.",
+    connectSubline:
+      "¿Tienes un proyecto en mente o buscas consultoría técnica? Estoy disponible para discutir nuevas oportunidades.",
     themeLight: "Claro",
     themeDark: "Oscuro",
     themeSystem: "Sistema",
@@ -94,19 +98,19 @@ export const translations: Record<Lang, Translations> = {
         title: "Arquitectura & Desarrollo",
         items: [
           "Diseño de sistemas distribuidos",
-          "Microservicios & APIs REST/GraphQL",
-          "TypeScript / React / Node.js",
-          "PostgreSQL / MongoDB / Redis",
+          "Microservicios & Ecosistemas de APIs",
+          "Arquitecturas Reactivas & Full-stack",
+          "Estrategias de Persistencia & Modelado",
           "Event Sourcing & CQRS",
         ],
       },
       infra: {
         title: "Infraestructura",
         items: [
-          "Docker & Kubernetes",
+          "Orquestación & Ecosistemas Cloud Native",
           "Virtualización & Networking",
-          "Kong API Gateway",
-          "Linux / Appliances",
+          "Gestión de Tráfico & Gateways",
+          "Hardening & Optimización de Sistemas",
           "Alta disponibilidad & DR",
         ],
       },
@@ -114,9 +118,9 @@ export const translations: Record<Lang, Translations> = {
         title: "Ciberseguridad",
         items: [
           "Análisis de CVEs & Hardening",
-          "Wazuh SIEM (self-hosted)",
-          "SonarQube & análisis estático",
-          "Sentry & observabilidad",
+          "Inteligencia de Amenazas & SIEM",
+          "Garantía de Calidad & Seguridad de Código",
+          "Observabilidad Proactiva & Diagnóstico",
           "Seguridad en CI/CD",
         ],
       },
@@ -198,6 +202,224 @@ export const translations: Record<Lang, Translations> = {
         ],
       },
     },
+    specialtyPages: {
+      architecture: {
+        title: "Arquitectura & Desarrollo",
+        subtitle: "Sistemas robustos y escalables",
+        description:
+          "Diseño e implementación de soluciones digitales de punta a punta, priorizando la mantenibilidad, escalabilidad y el rendimiento óptimo.",
+        accentColor: "#3b82f6",
+        details: [
+          {
+            title: "Diseño de Sistemas Distribuidos",
+            description:
+              "Arquitectura de sistemas donde los componentes colaboran a través de la red de forma transparente, garantizando tolerancia a fallos y alta disponibilidad mediante el desacoplamiento efectivo.",
+            solutions: {
+              enterprise: "AWS Managed Services, Google Cloud Pub/Sub",
+              openSource: "RabbitMQ, Redis, Nginx Load Balancing",
+            },
+          },
+          {
+            title: "Microservicios & Ecosistemas de APIs",
+            description:
+              "Descomposición de aplicaciones complejas en servicios autónomos que se comunican mediante contratos claros. Implementación de API Gateways y mallas de servicios.",
+            solutions: {
+              enterprise: "MuleSoft, Apigee, AWS App Mesh",
+              openSource: "Kong Gateway, Apache APISIX, gRPC",
+            },
+          },
+          {
+            title: "Arquitecturas Reactivas & Full-stack",
+            description:
+              "Desarrollo orientado a eventos y sistemas no bloqueantes. Foco en la experiencia de usuario y la eficiencia en el flujo de datos desde el backend hasta la UI.",
+            solutions: {
+              enterprise: "Vercel Enterprise, Firebase managed stacks",
+              openSource: "Vite, Bun, Node.js (Fastify), Rust (Axum)",
+            },
+          },
+          {
+            title: "Estrategias de Persistencia & Modelado",
+            description:
+              "Selección y modelado del motor de datos adecuado (SQL, NoSQL, Cache) según el caso de uso, garantizando integridad y velocidad de acceso.",
+            solutions: {
+              enterprise: "Snowflake, Amazon Aurora, MongoDB Atlas",
+              openSource: "PostgreSQL, Supabase, ClickHouse",
+            },
+          },
+          {
+            title: "Event Sourcing & CQRS",
+            description:
+              "Patrones avanzados para sistemas con lógica de negocio compleja, separando las operaciones de lectura y escritura para optimizar el rendimiento y la trazabilidad.",
+            solutions: {
+              enterprise: "AWS EventBridge, Azure Event Hubs",
+              openSource: "Apache Kafka, EventStoreDB",
+            },
+          },
+        ],
+      },
+      infra: {
+        title: "Infraestructura",
+        subtitle: "Escalabilidad & Resiliencia",
+        description:
+          "Diseño de infraestructuras híbridas y cloud-native preparadas para el crecimiento escalar, garantizando la continuidad del negocio y la eficiencia operativa.",
+        accentColor: "#10b981",
+        details: [
+          {
+            title: "Orquestación & Ecosistemas Cloud Native",
+            description:
+              "Implementación y gestión de clústeres de contenedores para cargas de trabajo críticas, optimizando el uso de recursos y la velocidad de despliegue.",
+            solutions: {
+              enterprise: "AWS (EKS), Azure (AKS), GCP (GKE), OCI, OpenShift",
+              openSource: "Rancher RKE2, Docker Swarm",
+            },
+          },
+          {
+            title: "Virtualización & Networking",
+            description:
+              "Segregación lógica y física de recursos. Diseño de redes seguras y topologías de alta performance para centros de datos modernos.",
+            solutions: {
+              enterprise: "Microsoft Hyper-V, Fortinet, MikroTik",
+              openSource: "Proxmox, pfSense",
+            },
+          },
+          {
+            title: "Gestión de Tráfico & Gateways",
+            description:
+              "Control centralizado de puntos de entrada, balanceo de carga de capa 4/7 y gestión del ciclo de vida de APIs en entornos distribuidos.",
+            solutions: {
+              enterprise: "Apigee, F5 BIG-IP, Kong Enterprise",
+              openSource: "Nginx, Traefik, HAProxy, Kong OSS",
+            },
+          },
+          {
+            title: "Hardening & Optimización de Sistemas",
+            description:
+              "Protección del sistema operativo mediante la reducción de superficie de ataque y el ajuste fino de parámetros para máximo rendimiento.",
+            solutions: {
+              enterprise: "RHEL (Red Hat Enterprise Linux)",
+              openSource: "Debian, Ubuntu Server, Lynis Audit",
+            },
+          },
+          {
+            title: "Alta Disponibilidad & Disaster Recovery",
+            description:
+              "Estrategias integrales para garantizar que los servicios sigan operativos ante fallos catastróficos, con mínimos tiempos de recuperación.",
+            solutions: {
+              enterprise: "Cloud Storage Replication, Veeam (conocimiento)",
+              openSource: "Proxmox Backup Server, Replicación RKE2",
+            },
+          },
+        ],
+      },
+      security: {
+        title: "Ciberseguridad",
+        subtitle: "Vigilancia & Protección Profunda",
+        description:
+          "Seguridad integrada en el ADN del sistema, desde el análisis de vulnerabilidades en desarrollo hasta la detección de amenazas en producción.",
+        accentColor: "#f43f5e",
+        details: [
+          {
+            title: "Análisis de CVEs & Hardening",
+            description:
+              "Escaneo proactivo de vulnerabilidades y aplicación de parches de seguridad. Blindaje de contenedores y sistemas operativos.",
+            solutions: {
+              enterprise: "Qualys, Tenable (conocimiento)",
+              openSource: "Trivy, Snyk, Nmap",
+            },
+          },
+          {
+            title: "Inteligencia de Amenazas & SIEM",
+            description:
+              "Centralización y análisis de logs para identificar comportamientos anómalos y responder ante incidentes de seguridad en tiempo real.",
+            solutions: {
+              enterprise: "Splunk Enterprise",
+              openSource: "Wazuh, ELK Stack (Security)",
+            },
+          },
+          {
+            title: "Garantía de Calidad & Seguridad de Código",
+            description:
+              "Análisis estático y dinámico de código para detectar fallas lógicas y debilidades de seguridad antes de que lleguen a producción (DevSecOps).",
+            solutions: {
+              enterprise: "Checkmarx (conocimiento)",
+              openSource: "SonarQube, Snyk, npm audit, OWASP Dependency-Check",
+            },
+          },
+          {
+            title: "Observabilidad Proactiva & Diagnóstico",
+            description:
+              "Monitoreo de métricas y trazas para identificar el origen raíz de los problemas, garantizando la salud del ecosistema digital.",
+            solutions: {
+              enterprise: "Datadog, New Relic, Dynatrace (conocimiento)",
+              openSource: "Sentry, Prometheus, Grafana, Zabbix",
+            },
+          },
+          {
+            title: "Seguridad en CI/CD",
+            description:
+              "Automatización de controles de seguridad dentro de las tuberías de despliegue, evitando la fuga de secretos y garantizando la integridad del código.",
+            solutions: {
+              enterprise: "Azure DevOps, GitHub Enterprise Security",
+              openSource: "Jenkins, GitHub Actions, GitLab CI, Gitleaks",
+            },
+          },
+        ],
+      },
+      leadership: {
+        title: "Liderazgo",
+        subtitle: "Tech Lead & Estrategia",
+        description:
+          "Liderazgo técnico centrado en ser un multiplicador de fuerzas, escalando el talento del equipo y alineando la tecnología con los objetivos del negocio.",
+        accentColor: "#f59e0b",
+        details: [
+          {
+            title: "Liderazgo Técnico (Force Multiplier)",
+            description:
+              "Más de 10 años guiando equipos de ingeniería, traduciendo requisitos complejos en arquitecturas ejecutables y elevando el estándar técnico.",
+            solutions: {
+              enterprise: "Gestión por Objetivos (OKR), KPIs de Ingeniería",
+              openSource: "Scrum, Kanban, Agile Mindset",
+            },
+          },
+          {
+            title: "Arquitectura Organizacional",
+            description:
+              "Diseño de flujos de trabajo eficientes y estructuras de equipo escalables. Integración fluida entre las áreas de Negocio y Tecnología.",
+            solutions: {
+              enterprise: "Gobierno de TI, Roles & Responsabilidades",
+              openSource: "Estandarización de Procesos, SDLC Moderno",
+            },
+          },
+          {
+            title: "Coaching Técnico & Mentoring",
+            description:
+              "Desarrollo del talento interno, capacitando perfiles en nuevas tecnologías y fomentando una cultura de excelencia y código limpio.",
+            solutions: {
+              enterprise: "Planes de Carrera, Skill Matrix",
+              openSource: "Peer Reviews, Tech Talks, Mentoring 1-a-1",
+            },
+          },
+          {
+            title: "Gestión de Incidentes Críticos",
+            description:
+              "Liderazgo y comando durante crisis técnicas, manteniendo la calma y ejecutando decisiones estructuradas para restaurar el servicio.",
+            solutions: {
+              enterprise: "Incident Command System (ICS), Post-mortems",
+              openSource: "Cultura Blame-free, Mejora Continua",
+            },
+          },
+          {
+            title: "Toma de Decisiones Estratégicas",
+            description:
+              "Balanceo consciente entre la deuda técnica y la velocidad de salida al mercado (Time-to-Market), maximizando el ROI tecnológico.",
+            solutions: {
+              enterprise: "Análisis de Costos Cloud, Evaluación de Vendor",
+              openSource: "Optimización de Recursos OSS, Buy vs Build",
+            },
+          },
+        ],
+      },
+    },
     legalTeasersPool: {
       privacy: [
         " (tus datos están tan seguros como un [[sudo rm -rf /]])",
@@ -226,6 +448,10 @@ export const translations: Record<Lang, Translations> = {
     sectionSkills: "Expertise",
     sectionProjects: "Projects",
     sectionConnect: "Connect",
+    heroScroll: "Explore Expertise",
+    connectHeadline: "Let's build together.",
+    connectSubline:
+      "Have a project in mind or looking for technical consulting? I'm available to discuss new opportunities.",
     themeLight: "Light",
     themeDark: "Dark",
     themeSystem: "System",
@@ -295,19 +521,19 @@ export const translations: Record<Lang, Translations> = {
         title: "Architecture & Development",
         items: [
           "Distributed System Design",
-          "Microservices & REST/GraphQL APIs",
-          "TypeScript / React / Node.js",
-          "PostgreSQL / MongoDB / Redis",
+          "Microservices & API Ecosystems",
+          "Reactive & Full-stack Architectures",
+          "Data Strategy & Persistence Modeling",
           "Event Sourcing & CQRS",
         ],
       },
       infra: {
         title: "Infrastructure",
         items: [
-          "Docker & Kubernetes",
+          "Orchestration & Cloud Native Ecosystems",
           "Virtualization & Networking",
-          "Kong API Gateway",
-          "Linux / Appliances",
+          "Traffic Management & API Gateways",
+          "System Hardening & Performance Tuning",
           "High Availability & DR",
         ],
       },
@@ -315,9 +541,9 @@ export const translations: Record<Lang, Translations> = {
         title: "Cybersecurity",
         items: [
           "CVE Analysis & Hardening",
-          "Wazuh SIEM (self-hosted)",
-          "SonarQube & Static Analysis",
-          "Sentry & Observability",
+          "Threat Intelligence & SIEM Management",
+          "Quality Assurance & Code Security",
+          "Proactive Observability & Incident Detection",
           "CI/CD Security",
         ],
       },
@@ -396,6 +622,224 @@ export const translations: Record<Lang, Translations> = {
           "Chess engine with chess.js for rule validation",
           "Responsive web that works on any device",
           "Packaged as native Android app with Capacitor",
+        ],
+      },
+    },
+    specialtyPages: {
+      architecture: {
+        title: "Architecture & Development",
+        subtitle: "Robust and scalable systems",
+        description:
+          "End-to-end design and implementation of digital solutions, prioritizing maintainability, scalability, and optimal performance.",
+        accentColor: "#3b82f6",
+        details: [
+          {
+            title: "Distributed System Design",
+            description:
+              "Architecture of systems where components collaborate across the network transparently, ensuring fault tolerance and high availability through effective decoupling.",
+            solutions: {
+              enterprise: "AWS Managed Services, Google Cloud Pub/Sub",
+              openSource: "RabbitMQ, Redis, Nginx Load Balancing",
+            },
+          },
+          {
+            title: "Microservices & API Ecosystems",
+            description:
+              "Decomposing complex applications into autonomous services that communicate via clear contracts. Implementation of API Gateways and service meshes.",
+            solutions: {
+              enterprise: "MuleSoft, Apigee, AWS App Mesh",
+              openSource: "Kong Gateway, Apache APISIX, gRPC",
+            },
+          },
+          {
+            title: "Reactive & Full-stack Architectures",
+            description:
+              "Event-driven development and non-blocking systems. Focus on user experience and data flow efficiency from backend to UI.",
+            solutions: {
+              enterprise: "Vercel Enterprise, Firebase managed stacks",
+              openSource: "Vite, Bun, Node.js (Fastify), Rust (Axum)",
+            },
+          },
+          {
+            title: "Data Strategy & Persistence Modeling",
+            description:
+              "Selection and modeling of the right data engine (SQL, NoSQL, Cache) based on use case, ensuring integrity and access speed.",
+            solutions: {
+              enterprise: "Snowflake, Amazon Aurora, MongoDB Atlas",
+              openSource: "PostgreSQL, Supabase, ClickHouse",
+            },
+          },
+          {
+            title: "Event Sourcing & CQRS",
+            description:
+              "Advanced patterns for systems with complex business logic, separating read and write operations to optimize performance and traceability.",
+            solutions: {
+              enterprise: "AWS EventBridge, Azure Event Hubs",
+              openSource: "Apache Kafka, EventStoreDB",
+            },
+          },
+        ],
+      },
+      infra: {
+        title: "Infrastructure",
+        subtitle: "Scalability & Resilience",
+        description:
+          "Design of hybrid and cloud-native infrastructures prepared for scalar growth, ensuring business continuity and operational efficiency.",
+        accentColor: "#10b981",
+        details: [
+          {
+            title: "Cloud Native Orchestration",
+            description:
+              "Implementation and management of container clusters for critical workloads, optimizing resource usage and deployment speed.",
+            solutions: {
+              enterprise: "AWS (EKS), Azure (AKS), GCP (GKE), OCI, OpenShift",
+              openSource: "Rancher RKE2, Docker Swarm",
+            },
+          },
+          {
+            title: "Virtualization & Networking",
+            description:
+              "Logical and physical resource segregation. Design of secure networks and high-performance topologies for modern data centers.",
+            solutions: {
+              enterprise: "Microsoft Hyper-V, Fortinet, MikroTik",
+              openSource: "Proxmox, pfSense",
+            },
+          },
+          {
+            title: "Traffic Management & Gateways",
+            description:
+              "Centralized control of entry points, layer 4/7 load balancing, and API lifecycle management in distributed environments.",
+            solutions: {
+              enterprise: "Apigee, F5 BIG-IP, Kong Enterprise (knowledge)",
+              openSource: "Nginx, Traefik, HAProxy, Kong OSS",
+            },
+          },
+          {
+            title: "Hardening & System Tuning",
+            description:
+              "Operating system protection through attack surface reduction and fine-tuning parameters for maximum performance.",
+            solutions: {
+              enterprise: "RHEL (Red Hat Enterprise Linux)",
+              openSource: "Debian, Ubuntu Server, Lynis Audit",
+            },
+          },
+          {
+            title: "High Availability & Disaster Recovery",
+            description:
+              "Comprehensive strategies to ensure services remain operational in the face of catastrophic failures, with minimal recovery times.",
+            solutions: {
+              enterprise: "Cloud Storage Replication, Veeam (knowledge)",
+              openSource: "Proxmox Backup Server, RKE2 Replication",
+            },
+          },
+        ],
+      },
+      security: {
+        title: "Cybersecurity",
+        subtitle: "Deep Vigilance & Protection",
+        description:
+          "Security integrated into the system's DNA, from development vulnerability analysis to production threat detection.",
+        accentColor: "#f43f5e",
+        details: [
+          {
+            title: "CVE Analysis & Hardening",
+            description:
+              "Proactive vulnerability scanning and security patch application. Hardening of containers and operating systems.",
+            solutions: {
+              enterprise: "Qualys, Tenable (knowledge)",
+              openSource: "Trivy, Snyk, Nmap",
+            },
+          },
+          {
+            title: "Threat Intelligence & SIEM",
+            description:
+              "Centralized log analysis to identify anomalous behavior and respond to security incidents in real-time.",
+            solutions: {
+              enterprise: "Splunk Enterprise",
+              openSource: "Wazuh, ELK Stack (Security)",
+            },
+          },
+          {
+            title: "QA & Code Security",
+            description:
+              "Static and dynamic code analysis to detect logical flaws and security weaknesses before they reach production (DevSecOps).",
+            solutions: {
+              enterprise: "Checkmarx (knowledge)",
+              openSource: "SonarQube, Snyk, npm audit, OWASP Dependency-Check",
+            },
+          },
+          {
+            title: "Proactive Observability & Diagnosis",
+            description:
+              "Monitoring metrics and traces to identify root causes of issues, ensuring digital ecosystem health.",
+            solutions: {
+              enterprise: "Datadog, New Relic, Dynatrace (knowledge)",
+              openSource: "Sentry, Prometheus, Grafana, Zabbix",
+            },
+          },
+          {
+            title: "CI/CD Security",
+            description:
+              "Automating security controls within deployment pipelines, preventing secret leaks and ensuring code integrity.",
+            solutions: {
+              enterprise: "Azure DevOps, GitHub Enterprise Security",
+              openSource: "Jenkins, GitHub Actions, GitLab CI, Gitleaks",
+            },
+          },
+        ],
+      },
+      leadership: {
+        title: "Leadership",
+        subtitle: "Tech Lead & Strategy",
+        description:
+          "Technical leadership focused on being a force multiplier, scaling team talent and aligning technology with business objectives.",
+        accentColor: "#f59e0b",
+        details: [
+          {
+            title: "Technical Leadership (Force Multiplier)",
+            description:
+              "10+ years guiding engineering teams, translating complex requirements into executable architectures and raising technical standards.",
+            solutions: {
+              enterprise: "Management by Objectives (OKRs), Engineering KPIs",
+              openSource: "Scrum, Kanban, Agile Mindset",
+            },
+          },
+          {
+            title: "Organizational Architecture",
+            description:
+              "Designing efficient workflows and scalable team structures. Fluid integration between Business and Technology areas.",
+            solutions: {
+              enterprise: "IT Governance, Roles & Responsibilities",
+              openSource: "Process Standardization, Modern SDLC",
+            },
+          },
+          {
+            title: "Technical Coaching & Mentoring",
+            description:
+              "Developing internal talent, training profiles in new technologies and fostering a culture of excellence and clean code.",
+            solutions: {
+              enterprise: "Career Paths, Skill Matrix",
+              openSource: "Peer Reviews, Tech Talks, 1-on-1 Mentoring",
+            },
+          },
+          {
+            title: "Critical Incident Management",
+            description:
+              "Leadership and command during technical crises, maintaining calm and executing structured decisions to restore service.",
+            solutions: {
+              enterprise: "Incident Command System (ICS), Post-mortems",
+              openSource: "Blame-free Culture, Continuous Improvement",
+            },
+          },
+          {
+            title: "Strategic Decision Making",
+            description:
+              "Conscious balancing between technical debt and speed to market, maximizing technological ROI.",
+            solutions: {
+              enterprise: "Cloud Cost Analysis, Vendor Evaluation",
+              openSource: "OSS Resource Optimization, Buy vs Build",
+            },
+          },
         ],
       },
     },

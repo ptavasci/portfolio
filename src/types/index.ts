@@ -41,6 +41,25 @@ export interface LegalSection {
   bullets?: string[];
 }
 
+export interface SpecialtySolution {
+  enterprise: string;
+  openSource: string;
+}
+
+export interface SpecialtyDetail {
+  title: string;
+  description: string;
+  solutions?: SpecialtySolution;
+}
+
+export interface SpecialtyPageTranslation {
+  title: string;
+  subtitle: string;
+  description: string;
+  accentColor: string; // Tailwind color class or hex
+  details: SpecialtyDetail[];
+}
+
 export interface Translations {
   badge: string;
   heroLine1: string;
@@ -79,10 +98,14 @@ export interface Translations {
   skills: Record<SkillKey, SkillGroup>;
   projects: Record<ProjectKey, ProjectTranslation>;
   projectPages: Record<ProjectKey, ProjectPageTranslation>;
+  specialtyPages: Record<SkillKey, SpecialtyPageTranslation>;
   legalTeasersPool: {
     privacy: string[];
     terms: string[];
   };
+  heroScroll: string;
+  connectHeadline: string;
+  connectSubline: string;
 }
 
 /* ─── Data Types ────────────────────────────────────────────────────── */

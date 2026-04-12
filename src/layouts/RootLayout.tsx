@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import { useApp } from "@/contexts/AppContext";
 import { useLegalTypewriter } from "@/hooks/useLegalTypewriter";
 import { useSeo } from "@/hooks/useSeo";
@@ -9,19 +9,24 @@ import ContactModal from "@/components/ContactModal";
 import PageSkeleton from "@/components/PageSkeleton";
 import SkipNav from "@/components/SkipNav";
 
-/**
- * Root Layout wrapper for the entire application.
- * Manages the coordinated typewriter state for the footer legal links.
- */
 export default function RootLayout() {
   const { lang } = useApp();
+  const location = useLocation();
   const typewriter = useLegalTypewriter(lang);
+
+  const isHomePage = location.pathname === "/";
 
   // Activate Dynamic SEO Titles
   useSeo(lang);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-bg-dark transition-colors duration-300 flex flex-col font-sans selection:bg-brand-primary/20 selection:text-brand-primary">
+    <div
+      className={`min-h-screen bg-white dark:bg-bg-dark transition-colors duration-300 flex flex-col font-sans selection:bg-brand-primary/20 selection:text-brand-primary ${
+        isHomePage
+          ? "lg:h-screen lg:overflow-y-auto snap-y-mandatory scroll-smooth"
+          : ""
+      }`}
+    >
       {/* ── Ambient Background ─────────────────────────────────── */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
         {/* Subtle Grid */}
@@ -36,16 +41,21 @@ export default function RootLayout() {
       <SkipNav />
       <Header />
 
-      <main id="main-content" className="flex-1 w-full pt-12">
+      <main
+        id="main-content"
+        className={`flex-1 w-full ${isHomePage ? "" : "pt-12"}`}
+      >
         <Suspense fallback={<PageSkeleton />}>
           <Outlet />
         </Suspense>
       </main>
 
-      <Footer
-        activeLink={typewriter.activeLink}
-        displayText={typewriter.displayText}
-      />
+      <div className={isHomePage ? "snap-section" : ""}>
+        <Footer
+          activeLink={typewriter.activeLink}
+          displayText={typewriter.displayText}
+        />
+      </div>
 
       <ContactModal />
       <ScrollRestoration />

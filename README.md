@@ -30,22 +30,28 @@ This project adheres to professional software engineering standards:
 ## ✨ Highlighted Features
 
 ### 💻 Coordinated "Legal Glitch" Easter Egg
+
 The footer features a synchronized typewriter effect on the Privacy and Terms links. It cycles through engineering-themed humorous phrases (e.g., `sudo rm -rf /`, `garbage collectors`, `linters`) with:
+
 - **Premium Censorship Aesthetic**: Selective blurring of words with dynamic pulse animations and a custom "redacted" texture overlay.
 - **Terminal High-Fidelity**: A custom 3px blinking orange caret that simulates a real console cursor.
 
 ### ♟️ Ajedrez IA (AI Chess Engine)
+
 A full-featured chess project designed for big screens (Android TV):
+
 - **LLM Integration**: Game difficulty is scaled by swapping between different LLM models.
 - **Personality Driven**: The AI doesn't just play optimally; it adjusts its "character" and move quality based on the selected level.
 - **Remote-First UX**: Fully navigable with a standard TV remote D-Pad.
 
 ### 📱 Progressive Web App (PWA)
+
 - **Auto-updating service worker** via `vite-plugin-pwa`.
 - **Offline-ready** with a custom web manifest.
 - **Installable** on any device with a "Add to Home Screen" prompt.
 
 ### 🎨 UI Polish
+
 - **Scroll Reveal Animations**: Components animate into view as the user scrolls.
 - **3D Tilt Cards**: Interactive perspective effect on hover for project cards.
 - **Contact Modal**: Email obfuscation + clipboard copy for spam protection.
@@ -114,12 +120,12 @@ bun run preview
 
 ## 📦 Scripts
 
-| Command          | Description                          |
-| ---------------- | ------------------------------------ |
-| `bun run dev`    | Start Vite development server        |
-| `bun run build`  | Type-check + production build        |
-| `bun run preview`| Preview production build locally     |
-| `bun run prepare`| Install Husky git hooks (auto)       |
+| Command           | Description                      |
+| ----------------- | -------------------------------- |
+| `bun run dev`     | Start Vite development server    |
+| `bun run build`   | Type-check + production build    |
+| `bun run preview` | Preview production build locally |
+| `bun run prepare` | Install Husky git hooks (auto)   |
 
 ## 🔒 Code Quality
 
@@ -127,4 +133,5 @@ bun run preview
 - **Prettier** auto-formats all `.ts`, `.tsx`, `.js`, `.jsx` files on commit.
 
 ---
-*Pablo Tavasci Dozo — Software Engineer & Architect*
+
+_Pablo Tavasci Dozo — Software Engineer & Architect_
