@@ -58,5 +58,10 @@ export function useSeo(lang: Lang) {
     updateMetaTag("og:description", desc, true);
     updateMetaTag("og:type", "website", true);
     updateMetaTag("og:url", window.location.href, true);
+    updateMetaTag("og:image", `${window.location.origin}/og-image.png`, true);
+    updateMetaTag("twitter:card", "summary_large_image");
+    updateMetaTag("twitter:title", title);
+    updateMetaTag("twitter:description", desc);
+    updateMetaTag("twitter:image", `${window.location.origin}/og-image.png`);
   }, [location.pathname, lang, t]);
 }
