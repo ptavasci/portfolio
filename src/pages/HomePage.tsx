@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState, useLayoutEffect, useRef, useEffect } from "react";
 import { useNavigationType, NavigationType } from "react-router-dom";
 import { MapPin, Mail, Check, Shield } from "lucide-react";
 import { useApp } from "../contexts/AppContext";
@@ -18,32 +18,91 @@ export default function HomePage() {
   // React Router logs F5 reloads as POP. We must bypass the POP check on first mount to defeat F5 restoring scroll.
   useLayoutEffect(() => {
     const isFirst = isFirstMount.current;
-    if (isFirst) {
-      isFirstMount.current = false;
-    } else if (navType === NavigationType.Pop) {
-      // Only respect POP scroll restoration for subsequent In-App Back navigations
+
+    // Attempt to grab the container unconditionally
+    const scrollContainer = document.getElementById("scroll-container");
+    if (!scrollContainer) {
+      if (isFirst) isFirstMount.current = false;
       return;
     }
 
-    // Use absolute ID to ensure we grab it regardless of snap classes
-    const scrollContainer = document.getElementById("scroll-container");
-    if (!scrollContainer) return;
+    if (isFirst) {
+      isFirstMount.current = false;
+    } else if (navType === NavigationType.Pop) {
+      // Only respect POP scroll restoration for subsequent In-App Back navigations.
+      // In Desktop, we manually inject the cached scroll position because the container
+      // loses its history reference when the homepage unmounts.
+      const savedScroll = sessionStorage.getItem("desktop_home_scroll");
+      if (savedScroll && window.innerWidth >= 1024) {
+        const prevBehavior = scrollContainer.style.scrollBehavior;
+        scrollContainer.style.scrollBehavior = "auto";
+        scrollContainer.scrollTop = parseInt(savedScroll, 10);
 
-    // Disable smooth scroll temporarily for instant jump
+        requestAnimationFrame(() => {
+          scrollContainer.scrollTop = parseInt(savedScroll, 10);
+          scrollContainer.style.scrollBehavior = prevBehavior;
+        });
+      }
+      return;
+    }
+
+    // Disable smooth scroll temporarily for instant jump to top
     const prevBehavior = scrollContainer.style.scrollBehavior;
     scrollContainer.style.scrollBehavior = "auto";
     scrollContainer.scrollTop = 0;
 
-    // Fallback for when the browser is extra aggressive with initial paints
-    const handle = requestAnimationFrame(() => {
-      scrollContainer.scrollTop = 0;
-      scrollContainer.style.scrollBehavior = prevBehavior;
-    });
+    // Absolute nuclear fallback: continuous 2-second lockdown interval.
+    // Chrome evaluates async history restoration often *after* our components finish fetching/styling mid-loader.
+    // We lock it aggressively at 0 for slightly longer than the CinematicLoader duration (1.5s).
+    const intervalId = window.setInterval(() => {
+      // Force window scroll to 0 (Crucial if browser viewport/DevTools drops below 'lg' breakpoint)
+      if (window.scrollY > 0) window.scrollTo(0, 0);
 
-    return () => cancelAnimationFrame(handle);
+      // Force container scroll to 0
+      if (scrollContainer && scrollContainer.scrollTop > 5) {
+        scrollContainer.style.scrollBehavior = "auto";
+        scrollContainer.scrollTop = 0;
+        scrollContainer.style.scrollBehavior = prevBehavior;
+      }
+    }, 20);
+
+    const cleanupId = window.setTimeout(() => {
+      window.clearInterval(intervalId);
+    }, 2000);
+
+    return () => {
+      window.clearInterval(intervalId);
+      window.clearTimeout(cleanupId);
+    };
   }, [navType]);
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Track Desktop Scroll Position
+  useEffect(() => {
+    const container = document.getElementById("scroll-container");
+    if (!container) return;
+
+    let timeoutId: number;
+    const handleScroll = () => {
+      if (window.innerWidth < 1024) return;
+      if (timeoutId) window.clearTimeout(timeoutId);
+
+      // Debounce saving to sessionStorage slightly to avoid perf hits during rapid scrolling
+      timeoutId = window.setTimeout(() => {
+        sessionStorage.setItem(
+          "desktop_home_scroll",
+          container.scrollTop.toString(),
+        );
+      }, 50);
+    };
+
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
