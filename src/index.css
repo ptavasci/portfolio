@@ -171,3 +171,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-brand-primary);
 }
+
+@keyframes loader-progress {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(-20%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-loader-progress {
+  animation: loader-progress 2s ease-in-out infinite;
+}

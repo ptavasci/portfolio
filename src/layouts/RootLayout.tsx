@@ -8,11 +8,14 @@ import Footer from "@/components/Footer";
 import ContactModal from "@/components/ContactModal";
 import PageSkeleton from "@/components/PageSkeleton";
 import SkipNav from "@/components/SkipNav";
+import CinematicLoader from "@/components/CinematicLoader";
+import { useState } from "react";
 
 export default function RootLayout() {
   const { lang } = useApp();
   const location = useLocation();
   const typewriter = useLegalTypewriter(lang);
+  const [showLoader, setShowLoader] = useState(true);
 
   const isHomePage = location.pathname === "/";
 
@@ -21,12 +24,16 @@ export default function RootLayout() {
 
   return (
     <div
-      className={`min-h-screen bg-white dark:bg-bg-dark transition-colors duration-300 flex flex-col font-sans selection:bg-brand-primary/20 selection:text-brand-primary ${
+      className={`min-h-screen bg-white dark:bg-bg-dark flex flex-col font-sans transition-opacity duration-1000 selection:bg-brand-primary/20 selection:text-brand-primary ${
+        showLoader ? "opacity-0 overflow-hidden" : "opacity-100"
+      } ${
         isHomePage
           ? "lg:h-screen lg:overflow-y-auto snap-y-mandatory scroll-smooth"
           : ""
       }`}
     >
+      <CinematicLoader onFinish={() => setShowLoader(false)} />
+
       {/* ── Ambient Background ─────────────────────────────────── */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
         {/* Subtle Grid */}
