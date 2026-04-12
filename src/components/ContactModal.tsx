@@ -73,7 +73,7 @@ export default function ContactModal() {
             </div>
             <h2
               id="contact-modal-title"
-              className="text-xl font-bold text-zinc-900 dark:text-white"
+              className="text-xl font-bold font-display text-zinc-900 dark:text-white"
             >
               {t.contactMe}
             </h2>
