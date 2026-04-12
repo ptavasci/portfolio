@@ -22,10 +22,10 @@ export const translations: Record<Lang, Translations> = {
     tagSecurity: "Ciberseguridad",
     tagLead: "Liderazgo técnico",
     tagLocation: "Argentina",
-    sectionSkills: "Especialidades",
+    sectionSkills: "Experiencia",
     sectionProjects: "Proyectos",
     sectionConnect: "Conectar",
-    heroScroll: "Explorar Especialidades",
+    heroScroll: "Explorar Experiencia",
     connectHeadline: "Hablemos de ingeniería.",
     connectSubline:
       "¿Tienes un proyecto en mente o buscas consultoría técnica? Estoy disponible para discutir nuevas oportunidades.",
