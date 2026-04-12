@@ -12,6 +12,7 @@ export function detectLanguage(): Lang {
 export const translations: Record<Lang, Translations> = {
   es: {
     badge: "+25 años en la industria",
+    headerRole: "Ingeniero de software",
     heroLine1: "Ingeniería de ",
     heroHighlight: "software",
     heroLine2: "de punta a punta",
@@ -450,6 +451,7 @@ export const translations: Record<Lang, Translations> = {
   },
   en: {
     badge: "+25 years in the industry",
+    headerRole: "Software Engineer",
     heroLine1: "End-to-end ",
     heroHighlight: "software",
     heroLine2: "engineering",

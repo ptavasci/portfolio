@@ -92,7 +92,19 @@ export default function Header() {
       className={`${isHomePage ? "sticky lg:fixed" : "sticky"} top-0 w-full z-50 bg-white/80 dark:bg-bg-dark/80 backdrop-blur-xl border-b border-zinc-200 dark:border-border-dark`}
     >
       <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link
+          to="/"
+          onClick={() => {
+            if (isHomePage) {
+              const scrollContainer =
+                document.getElementById("scroll-container");
+              if (scrollContainer)
+                scrollContainer.scrollTo({ top: 0, behavior: "smooth" });
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+          className="flex items-center gap-3 group"
+        >
           <Logo
             size={40}
             className="shadow-lg shadow-brand-primary/20 group-hover:shadow-brand-primary/40 transition-shadow rounded-[9px]"
@@ -102,7 +114,7 @@ export default function Header() {
               Pablo Tavasci Dozo
             </span>
             <p className="text-xs text-zinc-500 dark:text-zinc-400">
-              Software Engineer
+              {t.headerRole}
             </p>
           </div>
         </Link>

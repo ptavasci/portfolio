@@ -62,6 +62,7 @@ export interface SpecialtyPageTranslation {
 
 export interface Translations {
   badge: string;
+  headerRole: string;
   heroLine1: string;
   heroHighlight: string;
   heroLine2: string;
