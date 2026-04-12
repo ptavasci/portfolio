@@ -82,7 +82,17 @@ const ErrorFallback = () => (
   </div>
 );
 
-createRoot(document.getElementById("app")!).render(
+const container = document.getElementById("app")!;
+// Use a module-level variable to store the root for HMR persistence
+// (Vite will preserve this variable if the module is not fully reloaded)
+let root = (container as any)._reactRoot;
+
+if (!root) {
+  root = createRoot(container);
+  (container as any)._reactRoot = root;
+}
+
+root.render(
   <StrictMode>
     <AppProvider>
       <Sentry.ErrorBoundary fallback={<ErrorFallback />}>
