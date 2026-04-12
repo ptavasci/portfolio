@@ -28,13 +28,13 @@ export default function CinematicLoader({ onFinish }: CinematicLoaderProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-zinc-950 transition-opacity duration-700 ease-in-out ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-white dark:bg-zinc-950 transition-opacity duration-700 ease-in-out ${
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
       <div className="relative flex flex-col items-center">
         {/* Animated Background Aura */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-brand-primary/20 rounded-full blur-[60px] animate-pulse"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-brand-primary/10 dark:bg-brand-primary/20 rounded-full blur-[60px] animate-pulse"></div>
 
         {/* Centered Logo */}
         <div
@@ -42,12 +42,12 @@ export default function CinematicLoader({ onFinish }: CinematicLoaderProps) {
         >
           <Logo
             size={80}
-            className="shadow-2xl shadow-brand-primary/40 rounded-[18px]"
+            className="shadow-2xl shadow-brand-primary/20 dark:shadow-brand-primary/40 rounded-[18px]"
           />
         </div>
 
         {/* Minimalist Progress Indicator */}
-        <div className="mt-8 w-12 h-[2px] bg-zinc-800 overflow-hidden rounded-full">
+        <div className="mt-8 w-12 h-[2px] bg-zinc-100 dark:bg-zinc-800 overflow-hidden rounded-full">
           <div className="h-full bg-brand-primary animate-loader-progress"></div>
         </div>
       </div>
