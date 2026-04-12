@@ -5,14 +5,13 @@ interface LegalLinkProps {
   to: string;
   displayText: string;
   active?: boolean;
-  lang: 'es' | 'en';
 }
 
 /**
  * LegalLink - Presentational component for legal links with selective blur.
  * Centralized state in Layout.tsx manages the typewriter progress.
  */
-export default function LegalLink({ to, displayText, active = false, lang }: LegalLinkProps) {
+export default function LegalLink({ to, displayText, active = false }: LegalLinkProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   // Parse text to identify blurred sections marked with [[...]]

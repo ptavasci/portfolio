@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, type ReactNode } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import {
-  Sun, Moon, Monitor, ChevronDown, Check, Languages, Mail, X
+  Sun, Moon, Monitor, ChevronDown, Check, Languages, Mail
 } from 'lucide-react'
 import { useTheme, type Theme } from './ThemeContext'
 import { translations, type Translations } from './i18n'
@@ -26,7 +26,7 @@ export default function Layout({ children }: { children?: ReactNode }) {
 
   const themeRef = useRef<HTMLDivElement>(null)
   const langRef = useRef<HTMLDivElement>(null)
-  const footerRef = useRef<HTMLElement>(null)
+  const footerRef = useRef<HTMLParagraphElement>(null)
   const location = useLocation()
 
   /* Scroll to top on route change */
@@ -279,7 +279,6 @@ export default function Layout({ children }: { children?: ReactNode }) {
                     to="/privacy"
                     displayText={displayText.privacy}
                     active={activeLink === 'privacy'}
-                    lang={lang}
                   />
                 </li>
                 <li>
@@ -287,7 +286,6 @@ export default function Layout({ children }: { children?: ReactNode }) {
                     to="/terms"
                     displayText={displayText.terms}
                     active={activeLink === 'terms'}
-                    lang={lang}
                   />
                 </li>
               </ul>
