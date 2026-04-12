@@ -45,5 +45,10 @@
     "*.{ts,tsx,js,jsx}": [
       "prettier --write"
     ]
+  },
+  "overrides": {
+    "vite-plugin-pwa": {
+      "vite": "$vite"
+    }
   }
 }
