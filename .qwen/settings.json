@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git commit *)",
       "Bash(bun *)",
-      "Bash(mkdir *)"
+      "Bash(mkdir *)",
+      "Bash(move *)"
     ]
   },
   "$version": 3
