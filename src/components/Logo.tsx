@@ -1,9 +1,9 @@
 interface LogoProps {
-  className?: string
-  size?: number
+  className?: string;
+  size?: number;
 }
 
-export default function Logo({ className = '', size = 40 }: LogoProps) {
+export default function Logo({ className = "", size = 40 }: LogoProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -34,5 +34,5 @@ export default function Logo({ className = '', size = 40 }: LogoProps) {
         PTD
       </text>
     </svg>
-  )
+  );
 }

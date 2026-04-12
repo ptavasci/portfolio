@@ -1,18 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import * as Sentry from '@sentry/react'
-import clarity from '@microsoft/clarity'
+import { StrictMode, lazy } from "react";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import * as Sentry from "@sentry/react";
+import { AppProvider } from "@/contexts/AppContext";
+import "@/index.css";
+import RootLayout from "@/layouts/RootLayout";
 
-import { ThemeProvider } from './ThemeContext'
-import './index.css'
-import Layout from './Layout'
-import HomePage from './App'
-import ProjectPage from './ProjectPage'
-import PrivacyPage from './PrivacyPage'
-import TermsPage from './TermsPage'
-
-/* ─── Sentry ──────────────────────────────────────────────────────────── */
+// Lazy loaded pages for Code Splitting
+const HomePage = lazy(() => import("@/pages/HomePage"));
+const ProjectPage = lazy(() => import("@/pages/ProjectPage"));
+const PrivacyPage = lazy(() => import("@/pages/PrivacyPage"));
+const TermsPage = lazy(() => import("@/pages/TermsPage"));
 
 if (import.meta.env.VITE_SENTRY_DSN) {
   Sentry.init({
@@ -24,32 +22,28 @@ if (import.meta.env.VITE_SENTRY_DSN) {
     tracesSampleRate: 1.0,
     replaysSessionSampleRate: 0.1,
     replaysOnErrorSampleRate: 1.0,
-  })
+  });
 }
 
-/* ─── Microsoft Clarity ───────────────────────────────────────────────── */
+/* ─── Routes ─────────────────────────────────────────────────────────── */
 
-if (import.meta.env.VITE_CLARITY_ID) {
-  clarity.init(import.meta.env.VITE_CLARITY_ID)
-}
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "project/:slug", element: <ProjectPage /> },
+      { path: "privacy", element: <PrivacyPage /> },
+      { path: "terms", element: <TermsPage /> },
+    ],
+  },
+]);
 
-/* ─── App ─────────────────────────────────────────────────────────────── */
-
-const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes)
-
-createRoot(document.getElementById('app')!).render(
+createRoot(document.getElementById("app")!).render(
   <StrictMode>
-    <ThemeProvider>
-      <BrowserRouter>
-        <Layout>
-          <SentryRoutes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/project/:slug" element={<ProjectPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-          </SentryRoutes>
-        </Layout>
-      </BrowserRouter>
-    </ThemeProvider>
+    <AppProvider>
+      <RouterProvider router={router} />
+    </AppProvider>
   </StrictMode>,
-)
+);

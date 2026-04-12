@@ -13,7 +13,6 @@
   --color-border-dark: #27272a;
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-heading: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -23,10 +22,6 @@ html {
 body {
   font-family: var(--font-sans);
   @apply antialiased;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
 }
 
 ::selection {
@@ -50,6 +45,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-glitch-pulse {
   animation: glitch-pulse 2s infinite ease-in-out;
+}
+
+@keyframes bounce-x {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(25%); }
+}
+
+.animate-bounce-x {
+  animation: bounce-x 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .censor-grid {

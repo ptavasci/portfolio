@@ -1,22 +1,19 @@
-import { Link } from 'react-router-dom'
-import {
-  MapPin, Mail, Check, Shield, ArrowRight,
-} from 'lucide-react'
-import { useTheme } from './ThemeContext'
-import { translations } from './i18n'
-import { skillKeys, skillIcons, projectsMeta, socialLinks, openContact } from './data'
-
-/* ─── Home Page ───────────────────────────────────────────────────────── */
+import { Link } from "react-router-dom";
+import { MapPin, Mail, Check, Shield, ArrowRight } from "lucide-react";
+import { useApp } from "../contexts/AppContext";
+import { translations } from "../i18n";
+import { skillKeys, skillIcons, projectsMeta, socialLinks } from "../data";
+import { openContact } from "../utils/contact";
 
 export default function HomePage() {
-  const { lang } = useTheme()
-  const t = translations[lang]
+  const { lang } = useApp();
+  const t = translations[lang];
 
   return (
     <div className="max-w-5xl mx-auto px-6">
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-brand-primary/10 text-brand-primary text-sm font-medium mb-8 border border-orange-100 dark:border-brand-primary/20">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-brand-primary/10 text-brand-primary text-sm font-medium mb-8 border border-orange-100 dark:border-brand-primary/20 animate-fade-in-up">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"></span>
@@ -24,7 +21,10 @@ export default function HomePage() {
           {t.badge}
         </div>
 
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
+        <h1
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight animate-fade-in-up opacity-0"
+          style={{ animationDelay: "100ms" }}
+        >
           <span className="text-zinc-900 dark:text-white">{t.heroLine1}</span>
           <span className="bg-gradient-to-r from-brand-primary to-orange-400 bg-clip-text text-transparent">
             {t.heroHighlight}
@@ -33,18 +33,30 @@ export default function HomePage() {
           <span className="text-zinc-900 dark:text-white">{t.heroLine2}</span>
         </h1>
 
-        <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p
+          className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up opacity-0"
+          style={{ animationDelay: "200ms" }}
+        >
           {t.heroDescription}
         </p>
 
-        <div className="flex flex-wrap justify-center gap-3">
-          <span className="px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">{t.tagArch}</span>
-          <span className="px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">{t.tagDevOps}</span>
+        <div
+          className="flex flex-wrap justify-center gap-3 animate-fade-in-up opacity-0"
+          style={{ animationDelay: "300ms" }}
+        >
+          <span className="px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
+            {t.tagArch}
+          </span>
+          <span className="px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
+            {t.tagDevOps}
+          </span>
           <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
             <Shield className="w-3.5 h-3.5 text-zinc-400" />
             {t.tagSecurity}
           </span>
-          <span className="px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">{t.tagLead}</span>
+          <span className="px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
+            {t.tagLead}
+          </span>
           <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-100 dark:bg-surface-dark text-zinc-700 dark:text-zinc-300 text-sm font-medium border border-zinc-200 dark:border-border-dark">
             <MapPin className="w-3.5 h-3.5 text-zinc-400" />
             {t.tagLocation}
@@ -63,8 +75,8 @@ export default function HomePage() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {skillKeys.map((key) => {
-            const Icon = skillIcons[key]
-            const skill = t.skills[key]
+            const Icon = (skillIcons as any)[key];
+            const skill = t.skills[key];
             return (
               <div
                 key={key}
@@ -78,14 +90,17 @@ export default function HomePage() {
                 </h3>
                 <ul className="space-y-1.5">
                   {skill.items.map((item) => (
-                    <li key={item} className="text-sm text-zinc-600 dark:text-zinc-400 flex items-center gap-2">
+                    <li
+                      key={item}
+                      className="text-sm text-zinc-600 dark:text-zinc-400 flex items-center gap-2"
+                    >
                       <Check className="w-3.5 h-3.5 text-brand-primary shrink-0" />
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
-            )
+            );
           })}
         </div>
       </section>
@@ -104,7 +119,7 @@ export default function HomePage() {
             <Link
               key={project.name}
               to={`/project/${project.key}`}
-              className="group relative overflow-hidden rounded-2xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-primary/10 dark:hover:shadow-black/50 hover:-translate-y-1.5"
+              className="group relative overflow-hidden rounded-2xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-primary/10 dark:hover:shadow-black/50 hover:-translate-y-1.5 active:scale-[0.98]"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
 
@@ -118,7 +133,7 @@ export default function HomePage() {
                       {project.name}
                     </h3>
                   </div>
-                  <div className="text-zinc-400 group-hover:text-brand-primary group-hover:translate-x-1 transition-all">
+                  <div className="text-zinc-400 group-hover:text-brand-primary group-hover:animate-bounce-x transition-colors">
                     <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>
@@ -157,21 +172,21 @@ export default function HomePage() {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-6 py-4 rounded-xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:bg-orange-50 dark:hover:bg-brand-primary/10 hover:border-brand-primary/50 dark:hover:border-brand-primary/50 hover:text-brand-primary hover:shadow-lg hover:shadow-brand-primary/5"
+              className="group flex items-center gap-3 px-6 py-4 rounded-xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:bg-orange-50 dark:hover:bg-brand-primary/10 hover:border-brand-primary/50 dark:hover:border-brand-primary/50 hover:text-brand-primary hover:shadow-lg hover:shadow-brand-primary/5 active:scale-95"
             >
-              <link.icon />
+              <link.icon className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
               <span className="font-medium">{link.name}</span>
             </a>
           ))}
           <button
             onClick={openContact}
-            className="group flex items-center gap-3 px-6 py-4 rounded-xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:bg-orange-50 dark:hover:bg-brand-primary/10 hover:border-brand-primary/50 dark:hover:border-brand-primary/50 hover:text-brand-primary hover:shadow-lg hover:shadow-brand-primary/5 cursor-pointer"
+            className="group flex items-center gap-3 px-6 py-4 rounded-xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:bg-orange-50 dark:hover:bg-brand-primary/10 hover:border-brand-primary/50 dark:hover:border-brand-primary/50 hover:text-brand-primary hover:shadow-lg hover:shadow-brand-primary/5 cursor-pointer active:scale-95"
           >
-            <Mail className="w-5 h-5" />
+            <Mail className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
             <span className="font-medium">{t.contactMe}</span>
           </button>
         </div>
       </section>
     </div>
-  )
+  );
 }
