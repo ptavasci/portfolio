@@ -16,8 +16,8 @@ export default function TermsPage() {
       </p>
 
       <div className="space-y-8 text-zinc-600 dark:text-zinc-400 leading-relaxed">
-        {t.termsSections.map((section, idx) => (
-          <section key={idx}>
+        {t.termsSections.map((section: any) => (
+          <section key={section.title}>
             <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
               {section.title}
             </h2>

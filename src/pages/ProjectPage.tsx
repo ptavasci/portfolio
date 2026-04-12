@@ -24,9 +24,11 @@ export default function ProjectPage() {
 
   const screenshots = project?.screenshots ?? [];
 
-  useEffect(() => {
+  const [prevSlug, setPrevSlug] = useState(slug);
+  if (slug !== prevSlug) {
+    setPrevSlug(slug);
     setCurrentSlide(0);
-  }, [slug]);
+  }
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % screenshots.length);
@@ -50,7 +52,11 @@ export default function ProjectPage() {
         <p className="text-zinc-500 dark:text-zinc-400 mb-4">
           {lang === "es" ? "Proyecto no encontrado" : "Project not found"}
         </p>
-        <Link to="/" className="text-brand-primary hover:underline">
+        <Link
+          to="/"
+          viewTransition
+          className="text-brand-primary hover:underline"
+        >
           &larr; {t.backToHome}
         </Link>
       </div>
@@ -64,6 +70,7 @@ export default function ProjectPage() {
       <div className="flex items-center justify-between mb-10">
         <Link
           to="/"
+          viewTransition
           className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 hover:text-brand-primary transition-colors text-sm"
         >
           <ChevronLeft className="w-4 h-4" />
@@ -138,9 +145,9 @@ export default function ProjectPage() {
           </div>
           {screenshots.length > 1 && (
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-              {screenshots.map((_, idx) => (
+              {screenshots.map((src, idx) => (
                 <button
-                  key={idx}
+                  key={src}
                   onClick={() => setCurrentSlide(idx)}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === currentSlide ? "w-6 bg-brand-primary" : "bg-white/50 hover:bg-white/80"}`}
                   aria-label={`Slide ${idx + 1}`}
@@ -216,6 +223,7 @@ export default function ProjectPage() {
               <Link
                 key={other.key}
                 to={`/project/${other.key}`}
+                viewTransition
                 className="group relative overflow-hidden rounded-2xl bg-zinc-50 dark:bg-surface-dark border border-zinc-200 dark:border-border-dark p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-primary/10 dark:hover:shadow-black/50 hover:-translate-y-1.5 active:scale-[0.98]"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>

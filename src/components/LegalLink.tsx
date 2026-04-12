@@ -23,7 +23,7 @@ export default function LegalLink({ to, active, displayText }: LegalLinkProps) {
         const word = segment.slice(2, -2);
         return (
           <span
-            key={i}
+            key={`${segment}-${i}`}
             className="relative inline-block group/censor overflow-hidden align-bottom"
           >
             <span
@@ -44,7 +44,7 @@ export default function LegalLink({ to, active, displayText }: LegalLinkProps) {
         );
       }
       return (
-        <span key={i} className="leading-relaxed">
+        <span key={`${segment}-${i}`} className="leading-relaxed">
           {segment}
         </span>
       );

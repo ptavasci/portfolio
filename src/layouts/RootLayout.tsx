@@ -6,6 +6,7 @@ import { useSeo } from "@/hooks/useSeo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactModal from "@/components/ContactModal";
+import PageSkeleton from "@/components/PageSkeleton";
 
 /**
  * Root Layout wrapper for the entire application.
@@ -29,13 +30,7 @@ export default function RootLayout() {
       <Header />
 
       <main className="flex-1 w-full pt-12">
-        <Suspense
-          fallback={
-            <div className="flex-1 w-full flex items-center justify-center min-h-[50vh]">
-              <div className="w-8 h-8 rounded-full border-2 border-brand-primary border-t-transparent animate-spin"></div>
-            </div>
-          }
-        >
+        <Suspense fallback={<PageSkeleton />}>
           <Outlet />
         </Suspense>
       </main>

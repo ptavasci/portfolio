@@ -49,11 +49,13 @@ export default function ContactModal() {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-zinc-900/40 dark:bg-black/60 backdrop-blur-md animate-fade-in-up"
+      <button
+        type="button"
+        aria-label="Cerrar modal"
+        className="absolute inset-0 w-full h-full border-none outline-none bg-zinc-900/40 dark:bg-black/60 backdrop-blur-md animate-fade-in-up cursor-default"
         style={{ animationDuration: "0.2s" }}
         onClick={() => setIsOpen(false)}
-      ></div>
+      />
 
       {/* Modal */}
       <div
