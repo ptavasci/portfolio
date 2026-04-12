@@ -11,6 +11,7 @@ const HomePage = lazy(() => import("@/pages/HomePage"));
 const ProjectPage = lazy(() => import("@/pages/ProjectPage"));
 const PrivacyPage = lazy(() => import("@/pages/PrivacyPage"));
 const TermsPage = lazy(() => import("@/pages/TermsPage"));
+const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 
 if (import.meta.env.VITE_SENTRY_DSN) {
   Sentry.init({
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       { path: "project/:slug", element: <ProjectPage /> },
       { path: "privacy", element: <PrivacyPage /> },
       { path: "terms", element: <TermsPage /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);
