@@ -1,7 +1,7 @@
 import { Code, Server, Shield, Users, Car, Wine, Crown } from "lucide-react";
 import {
   GitHubIcon,
-  InstagramIcon,
+  LinkedInIcon,
   XIcon,
 } from "./components/icons/SocialIcons";
 import { type ProjectMeta } from "./types";
@@ -28,7 +28,7 @@ export const projectsMeta: ProjectMeta[] = [
     key: "autodata",
     name: "Autodata",
     icon: Car,
-    tags: ["Open Source", "Open Data", "Reference"],
+    tags: ["Open Source", "Open Data", "Reference", "PWA"],
     url: "https://autodata.ptavasci.net.ar",
     screenshots: [
       "/screenshots/autodata-catalog.png",
@@ -99,10 +99,10 @@ export const socialLinks = [
     accentColor: "#24292f",
   },
   {
-    name: "Instagram",
-    url: "https://www.instagram.com/ptavasci",
-    icon: InstagramIcon,
-    accentColor: "#E1306C",
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/ptavasci",
+    icon: LinkedInIcon,
+    accentColor: "#0A66C2",
   },
   {
     name: "X",
