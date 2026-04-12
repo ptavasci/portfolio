@@ -14,18 +14,24 @@ export default function HomePage() {
   // Force scroll to top on mount to ensure the first snap (Hero) is correctly aligned.
   // We use requestAnimationFrame to ensure the browser has finished layout/snap calculations.
   useLayoutEffect(() => {
-    const scrollContainer = document.querySelector(".snap-y-mandatory");
-    if (!scrollContainer) return;
+    // Disable native scroll restoration to prevent the "jump" on refresh
+    const originalRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
 
-    // First attempt
-    scrollContainer.scrollTop = 0;
+    const scrollContainer = document.querySelector(".snap-y-mandatory");
+    if (scrollContainer) {
+      scrollContainer.scrollTop = 0;
+    }
 
     // Second attempt after layout stabilizes
     const handle = requestAnimationFrame(() => {
-      scrollContainer.scrollTop = 0;
+      if (scrollContainer) scrollContainer.scrollTop = 0;
     });
 
-    return () => cancelAnimationFrame(handle);
+    return () => {
+      window.history.scrollRestoration = originalRestoration;
+      cancelAnimationFrame(handle);
+    };
   }, []);
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
