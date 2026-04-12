@@ -44,7 +44,7 @@ export default function SpecialtyPage() {
   const accentColor = specialty.accentColor || "#ff5c00";
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-12 relative font-sans">
+    <div className="max-w-5xl mx-auto px-6 pb-12 pt-4 relative font-sans">
       {/* Background Glow */}
       <div
         className="absolute top-0 right-0 w-[500px] h-[500px] opacity-10 dark:opacity-20 pointer-events-none rounded-full blur-[120px]"

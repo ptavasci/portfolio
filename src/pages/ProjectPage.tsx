@@ -75,7 +75,7 @@ export default function ProjectPage() {
   const Icon = project.icon;
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-12">
+    <div className="max-w-5xl mx-auto px-6 pb-12 pt-4">
       <div className="flex items-center justify-between mb-10">
         <button
           onClick={handleBack}

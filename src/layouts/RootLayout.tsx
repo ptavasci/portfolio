@@ -50,7 +50,7 @@ export default function RootLayout() {
 
         <main
           id="main-content"
-          className={`flex-1 w-full ${isHomePage ? "" : "pt-12"}`}
+          className={`flex-1 w-full ${isHomePage ? "" : "pt-6"}`}
         >
           <Suspense fallback={<PageSkeleton />}>
             <Outlet />
