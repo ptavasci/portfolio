@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactModal from "@/components/ContactModal";
 import PageSkeleton from "@/components/PageSkeleton";
+import SkipNav from "@/components/SkipNav";
 
 /**
  * Root Layout wrapper for the entire application.
@@ -32,9 +33,10 @@ export default function RootLayout() {
         <div className="absolute -bottom-32 left-[30%] w-80 h-80 bg-brand-primary/10 rounded-full mix-blend-multiply dark:mix-blend-color-dodge filter blur-[100px] opacity-70 animate-blob animation-delay-4000"></div>
       </div>
 
+      <SkipNav />
       <Header />
 
-      <main className="flex-1 w-full pt-12">
+      <main id="main-content" className="flex-1 w-full pt-12">
         <Suspense fallback={<PageSkeleton />}>
           <Outlet />
         </Suspense>

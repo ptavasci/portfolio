@@ -108,6 +108,19 @@ export default function ProjectPage() {
           className="relative mb-12 rounded-2xl overflow-hidden border border-zinc-200 dark:border-border-dark shadow-xl group"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label={`${projectTranslation.title} screenshots`}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowLeft") {
+              e.preventDefault();
+              prevSlide();
+            } else if (e.key === "ArrowRight") {
+              e.preventDefault();
+              nextSlide();
+            }
+          }}
         >
           <div className="relative aspect-video bg-zinc-100 dark:bg-surface-dark overflow-hidden">
             {screenshots.map((src, idx) => (
@@ -118,6 +131,10 @@ export default function ProjectPage() {
                 loading={idx === 0 ? "eager" : "lazy"}
                 decoding="async"
                 fetchPriority={idx === 0 ? "high" : "auto"}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`Screenshot ${idx + 1} of ${screenshots.length}`}
+                aria-hidden={idx !== currentSlide}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
                   idx === currentSlide ? "opacity-100" : "opacity-0"
                 }`}

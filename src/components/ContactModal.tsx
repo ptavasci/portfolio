@@ -9,21 +9,57 @@ export default function ContactModal() {
   const { lang } = useApp();
   const t = translations[lang];
   const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   const email = "ptavasci@" + "gmail.com";
 
   useEffect(() => {
-    const handleOpen = () => setIsOpen(true);
+    const handleOpen = () => {
+      previousFocusRef.current = document.activeElement as HTMLElement;
+      setIsOpen(true);
+    };
     window.addEventListener("openContactModal", handleOpen);
     return () => window.removeEventListener("openContactModal", handleOpen);
   }, []);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      // Restore focus after modal closes
+      previousFocusRef.current?.focus();
+      return;
+    }
 
-    // Close on escape
+    // Focus the close button when modal opens
+    closeButtonRef.current?.focus();
+
+    // Close on escape + trap focus
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsOpen(false);
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        return;
+      }
+
+      // Focus trap
+      if (e.key === "Tab" && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -79,6 +115,7 @@ export default function ContactModal() {
             </h2>
           </div>
           <button
+            ref={closeButtonRef}
             onClick={() => setIsOpen(false)}
             className="p-2 rounded-full text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-surface-dark-hover transition-colors cursor-pointer"
             aria-label="Close modal"

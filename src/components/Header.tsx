@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import {
   Sun,
@@ -22,6 +22,8 @@ export default function Header() {
 
   const themeRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
+  const themeDropdownRef = useRef<HTMLDivElement>(null);
+  const langDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -32,6 +34,49 @@ export default function Header() {
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  /* ── Keyboard nav helpers ────────────────────────────────────────── */
+  const handleDropdownKeyDown = useCallback(
+    (e: React.KeyboardEvent, close: () => void) => {
+      if (e.key === "Escape") {
+        close();
+        return;
+      }
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        const items = (
+          e.currentTarget.parentElement as HTMLElement
+        )?.querySelectorAll<HTMLElement>("button[role='menuitem']");
+        if (items && items.length > 0) {
+          const first = items[0];
+          const last = items[items.length - 1];
+          if (e.key === "ArrowDown") first.focus();
+          else last.focus();
+        }
+      }
+    },
+    [],
+  );
+
+  const handleItemKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      (e.currentTarget.closest("[role='menu']") as HTMLElement)
+        ?.querySelector<HTMLButtonElement>("button[aria-haspopup]")
+        ?.focus();
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const next = (e.currentTarget as HTMLElement)
+        .nextElementSibling as HTMLElement;
+      next?.focus();
+    }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const prev = (e.currentTarget as HTMLElement)
+        .previousElementSibling as HTMLElement;
+      prev?.focus();
+    }
   }, []);
 
   const themeLabelMap = {
@@ -66,8 +111,13 @@ export default function Header() {
                 setIsLangOpen(!isLangOpen);
                 setIsThemeOpen(false);
               }}
+              onKeyDown={(e) =>
+                handleDropdownKeyDown(e, () => setIsLangOpen(false))
+              }
               className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-100 dark:bg-surface-dark text-zinc-600 dark:text-zinc-300 transition-all hover:bg-zinc-200 dark:hover:bg-surface-dark-hover border border-transparent dark:border-border-dark active:scale-95"
               aria-label="Select language"
+              aria-haspopup="menu"
+              aria-expanded={isLangOpen}
             >
               <Languages className="w-4 h-4 transition-transform group-hover:-rotate-12" />
               <span className="text-sm font-medium hidden sm:inline-block">
@@ -79,7 +129,11 @@ export default function Header() {
             </button>
 
             {isLangOpen && (
-              <div className="absolute right-0 mt-2 w-36 rounded-xl bg-white dark:bg-surface-dark border border-zinc-200 dark:border-border-dark shadow-xl py-1 z-50 overflow-hidden">
+              <div
+                ref={langDropdownRef}
+                role="menu"
+                className="absolute right-0 mt-2 w-36 rounded-xl bg-white dark:bg-surface-dark border border-zinc-200 dark:border-border-dark shadow-xl py-1 z-50 overflow-hidden"
+              >
                 {(
                   [
                     ["es", "Español"],
@@ -88,10 +142,12 @@ export default function Header() {
                 ).map(([code, label]) => (
                   <button
                     key={code}
+                    role="menuitem"
                     onClick={() => {
                       setLang(code);
                       setIsLangOpen(false);
                     }}
+                    onKeyDown={handleItemKeyDown}
                     className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors
                       ${
                         lang === code
@@ -114,8 +170,13 @@ export default function Header() {
                 setIsThemeOpen(!isThemeOpen);
                 setIsLangOpen(false);
               }}
+              onKeyDown={(e) =>
+                handleDropdownKeyDown(e, () => setIsThemeOpen(false))
+              }
               className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-100 dark:bg-surface-dark text-zinc-600 dark:text-zinc-300 transition-all hover:bg-zinc-200 dark:hover:bg-surface-dark-hover border border-transparent dark:border-border-dark active:scale-95"
               aria-label="Select theme"
+              aria-haspopup="menu"
+              aria-expanded={isThemeOpen}
             >
               {theme === "light" && (
                 <Sun className="w-4 h-4 transition-transform group-hover:rotate-45" />
@@ -135,14 +196,20 @@ export default function Header() {
             </button>
 
             {isThemeOpen && (
-              <div className="absolute right-0 mt-2 w-40 rounded-xl bg-white dark:bg-surface-dark border border-zinc-200 dark:border-border-dark shadow-xl py-1 z-50 overflow-hidden">
+              <div
+                ref={themeDropdownRef}
+                role="menu"
+                className="absolute right-0 mt-2 w-40 rounded-xl bg-white dark:bg-surface-dark border border-zinc-200 dark:border-border-dark shadow-xl py-1 z-50 overflow-hidden"
+              >
                 {(["light", "dark", "system"] as Theme[]).map((opt) => (
                   <button
                     key={opt}
+                    role="menuitem"
                     onClick={() => {
                       setTheme(opt);
                       setIsThemeOpen(false);
                     }}
+                    onKeyDown={handleItemKeyDown}
                     className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors
                       ${
                         theme === opt
