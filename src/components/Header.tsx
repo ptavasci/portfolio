@@ -49,7 +49,7 @@ export default function Header() {
             className="shadow-lg shadow-brand-primary/20 group-hover:shadow-brand-primary/40 transition-shadow rounded-[9px]"
           />
           <div>
-            <span className="font-semibold text-zinc-900 dark:text-white">
+            <span className="font-semibold font-display text-zinc-900 dark:text-white">
               Pablo Tavasci Dozo
             </span>
             <p className="text-xs text-zinc-500 dark:text-zinc-400">
