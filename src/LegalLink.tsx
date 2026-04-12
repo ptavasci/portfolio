@@ -8,15 +8,14 @@ interface LegalLinkProps {
 }
 
 /**
- * LegalLink - Presentational component for legal links with selective blur.
- * Centralized state in Layout.tsx manages the typewriter progress.
+ * LegalLink - Presentational component for legal links with selective blur and terminal-style caret.
+ * Removed underlines per user preference, focusing on the orange blinking cursor.
  */
 export default function LegalLink({ to, displayText, active = false }: LegalLinkProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   // Parse text to identify blurred sections marked with [[...]]
   const parseText = (text: string) => {
-    // Split by [[...]] but keep the delimiters to identify blurred parts
     const segments = text.split(/(\[\[.*?\]\])/g);
     
     return segments.map((segment, i) => {
@@ -25,15 +24,28 @@ export default function LegalLink({ to, displayText, active = false }: LegalLink
         return (
           <span 
             key={i} 
-            className={`transition-all duration-500 rounded px-0.5 select-none
-              ${isHovered ? 'blur-0 bg-transparent' : 'blur-[3.5px] bg-zinc-400/20 dark:bg-zinc-100/10'}
+            className={`transition-all duration-700 rounded-sm relative inline-flex items-center justify-center px-1.5 mx-0.5 whitespace-nowrap
+              ${isHovered 
+                ? 'blur-0 bg-transparent text-brand-primary' 
+                : 'bg-zinc-800/40 dark:bg-zinc-200/5 backdrop-blur-md animate-glitch-pulse'
+              }
             `}
           >
-            {word}
+            {!isHovered && (
+              <span className="absolute inset-0 censor-grid opacity-30 pointer-events-none" />
+            )}
+            <span className={isHovered ? '' : 'opacity-0'}>
+              {word}
+            </span>
+            {!isHovered && (
+              <span className="absolute inset-0 flex items-center justify-center text-[0px] select-none">
+                {word}
+              </span>
+            )}
           </span>
         );
       }
-      return <span key={i}>{segment}</span>;
+      return <span key={i} className="leading-relaxed">{segment}</span>;
     });
   };
 
@@ -42,24 +54,15 @@ export default function LegalLink({ to, displayText, active = false }: LegalLink
       to={to}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`text-sm text-zinc-500 dark:text-zinc-400 transition-all duration-300 relative group flex items-center min-h-[1.5rem]
-        ${isHovered ? 'text-brand-primary scale-[1.02]' : (active ? 'text-zinc-400 dark:text-zinc-500' : '')}
+      className={`text-sm text-zinc-500 dark:text-zinc-400 transition-all duration-300 relative inline-block py-0.5
+        ${isHovered ? 'text-brand-primary' : (active ? 'text-zinc-400 dark:text-zinc-500' : '')}
       `}
     >
-      <span className="flex items-center whitespace-pre-wrap">
+      <span className="inline">
         {parseText(displayText)}
         {active && (
-          <span className="w-1 h-3 ml-0.5 bg-brand-primary animate-pulse flex-shrink-0" />
+          <span className="inline-block w-[3px] h-[1.1em] ml-1 bg-brand-primary shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-[pulse_0.8s_infinite] align-middle" />
         )}
-      </span>
-      
-      {/* Subtle underline indicator for "glitch" activity */}
-      <span className={`absolute -bottom-0.5 left-0 w-full h-[1px] transition-all duration-500
-        ${active ? 'bg-brand-primary/40 opacity-100' : 'bg-transparent opacity-0'}
-      `} />
-      
-      <span className="absolute -bottom-0.5 left-0 w-full h-[1px] bg-brand-primary/10 group-hover:bg-brand-primary transition-all duration-300 overflow-hidden">
-        <span className="absolute inset-0 bg-brand-primary -translate-x-full group-hover:translate-x-0 transition-transform duration-700" />
       </span>
     </Link>
   )

@@ -35,17 +35,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glitch-pulse {
+  0%, 100% { filter: blur(3px) brightness(1); }
+  50% { filter: blur(5px) brightness(1.2); }
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.5s ease-out forwards;
+  animation: fade-in-up 0.4s ease-out forwards;
 }
 
+.animate-glitch-pulse {
+  animation: glitch-pulse 2s infinite ease-in-out;
+}
+
+.censor-grid {
+  background-image: radial-gradient(circle, currentColor 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+}
