@@ -78,19 +78,34 @@ export const translations: Record<Lang, Translations> = {
     termsLastUpdated: "Última actualización",
     termsSections: [
       {
-        title: "1. Uso Legal",
+        title: "1. Aceptación de los Términos",
+        content:
+          "Al acceder a este sitio, aceptas estos términos. O no lo hagas, soy un desarrollador, no un abogado. Mi habilidad para escribir términos legales es tan estable como una versión beta de un framework de JavaScript.",
+      },
+      {
+        title: "2. Uso Legal",
         content:
           'Al usar este sitio, aceptas que el código es poesía, los errores son "features" no documentadas, y que el autor no se hace responsable si tu linter se vuelve agresivo después de ver estos proyectos.',
       },
       {
-        title: "2. Propiedad Intelectual",
+        title: "3. Propiedad Intelectual",
         content:
           "Puedes mirar, pero no rompas nada. Si encuentras un bug, es un regalo coleccionable. Todo el contenido es propiedad de Pablo Tavasci Dozo, a menos que se indique lo contrario.",
       },
       {
-        title: "3. Garantía",
+        title: "4. Responsabilidad",
+        content:
+          "No soy responsable si, tras leer mi perfil, sientes el impulso irefrenable de automatizar tu casa, aprender TypeScript, o dejar tu trabajo para poner una vinoteca online. Esas decisiones son tuyas, y probablemente sean buenas.",
+      },
+      {
+        title: "5. Garantía",
         content:
           'Este sitio se proporciona "tal cual", sin garantías de ningún tipo, excepto la garantía de que fue hecho con mucho café y dedicación.',
+      },
+      {
+        title: "6. Contacto",
+        content:
+          "Si tienes dudas, sugerencias, o simplemente quieres decirme que lo de Kamchatka es brillante (que lo es), puedes encontrarme en las redes sociales listadas en el sitio. Respondo a todo, excepto mensajes que empiecen con 'Estimado Sr'.",
       },
     ],
     skills: {
@@ -501,19 +516,34 @@ export const translations: Record<Lang, Translations> = {
     termsLastUpdated: "Last updated",
     termsSections: [
       {
-        title: "1. Legal Use",
+        title: "1. Acceptance of Terms",
+        content:
+          "By accessing this site, you accept these terms. Or don't, I'm a developer, not a lawyer. My ability to write legal terms is as stable as a beta version of a JavaScript framework.",
+      },
+      {
+        title: "2. Legal Use",
         content:
           'By using this site, you agree that code is poetry, bugs are undocumented "features," and the author is not responsible if your linter turns aggressive after seeing these projects.',
       },
       {
-        title: "2. Intellectual Property",
+        title: "3. Intellectual Property",
         content:
           "You can look, but don't break anything. If you find a bug, it's a collectible gift. All content is owned by Pablo Tavasci Dozo unless otherwise stated.",
       },
       {
-        title: "3. Warranty",
+        title: "4. Liability",
+        content:
+          "I am not responsible if, after reading my profile, you feel the urge to automate your home, learn TypeScript, or quit your job to start an online wine shop. Those decisions are yours, and probably good ones.",
+      },
+      {
+        title: "5. Warranty",
         content:
           'This site is provided "as is" without warranty of any kind, except the warranty that it was made with lots of coffee and dedication.',
+      },
+      {
+        title: "6. Contact",
+        content:
+          "If you have questions, suggestions, or simply want to tell me that the Kamchatka line is brilliant (it is), you can find me on the social networks listed on the site. I reply to everything, except messages that start with 'Dear Sir'.",
       },
     ],
     skills: {
