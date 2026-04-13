@@ -38,10 +38,10 @@ describe("useSeo", () => {
     expect(document.title).toContain("Autodata");
   });
 
-  it("sets project-specific title for vineteca", () => {
-    renderSeoHook("/project/vineteca", "en");
+  it("sets project-specific title for vinoteca", () => {
+    renderSeoHook("/project/vinoteca", "en");
 
-    expect(document.title).toContain("Vineteca");
+    expect(document.title).toContain("Vinoteca");
   });
 
   it("sets project-specific title for ajedrez", () => {

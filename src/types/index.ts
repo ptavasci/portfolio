@@ -6,7 +6,7 @@ export type Lang = "es" | "en";
 export type Theme = "light" | "dark" | "system";
 
 export type SkillKey = "architecture" | "infra" | "security" | "leadership";
-export type ProjectKey = "autodata" | "vineteca" | "ajedrez";
+export type ProjectKey = "autodata" | "vinoteca" | "ajedrez";
 
 /* ─── Context Types ─────────────────────────────────────────────────── */
 

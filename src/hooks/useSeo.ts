@@ -38,9 +38,9 @@ export function useSeo(lang: Lang) {
     if (path.startsWith("/project/autodata")) {
       title = `${t.projectPages.autodata.title} | Pablo Tavasci Dozo`;
       desc = t.projectPages.autodata.subtitle;
-    } else if (path.startsWith("/project/vineteca")) {
-      title = `${t.projectPages.vineteca.title} | Pablo Tavasci Dozo`;
-      desc = t.projectPages.vineteca.subtitle;
+    } else if (path.startsWith("/project/vinoteca")) {
+      title = `${t.projectPages.vinoteca.title} | Pablo Tavasci Dozo`;
+      desc = t.projectPages.vinoteca.subtitle;
     } else if (path.startsWith("/project/ajedrez")) {
       title = `${t.projectPages.ajedrez.title} | Pablo Tavasci Dozo`;
       desc = t.projectPages.ajedrez.subtitle;

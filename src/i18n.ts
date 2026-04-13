@@ -154,9 +154,9 @@ export const translations: Record<Lang, Translations> = {
     projects: {
       autodata: {
         description:
-          "Base de datos abierta de vehículos argentinos con asesor inteligente para la compra.",
+          "Plataforma altruista para democratizar el acceso a la información del parque automotor argentino.",
       },
-      vineteca: {
+      vinoteca: {
         description:
           "Sistema completo de gestión y venta online para vinoteca con soporte offline.",
       },
@@ -168,33 +168,34 @@ export const translations: Record<Lang, Translations> = {
     projectPages: {
       autodata: {
         title: "Autodata",
-        subtitle: "Base de datos de vehículos argentinos",
+        subtitle: "Democratizando la información automotriz en Argentina",
         description:
-          "Autodata es una plataforma que transforma la experiencia de compra de vehículos en Argentina. Más que un catálogo, funciona como un asesor personal que utiliza datos exhaustivos y algoritmos inteligentes para ofrecer recomendaciones personalizadas, comparativas detalladas e información transparente sobre precios, fichas técnicas y segmentos del mercado automotor local.",
+          "Autodata es un proyecto filantrópico nacido para transparentar el mercado automotor nacional. Es un ecosistema que utiliza modelos de IA para unificar criterios en la extracción de datos técnicos de diversas fuentes oficiales, garantizando comparativas precisas. El proyecto fue conceptualizado y desarrollado íntegramente mediante la colaboración de agentes de IA especializados en UX/UI, research y programación.",
         features: [
-          "Recomendaciones personalizadas según preferencias y presupuesto",
-          "Comparativas detalladas lado a lado de diferentes modelos",
-          "Fichas técnicas completas con especificaciones de motor, consumo y dimensiones",
-          "Datos de precios actualizados para vehículos nuevos y usados",
-          "Búsqueda avanzada por segmento, marca y rango de precio",
-          "Backend con Bun + Express para máximo rendimiento",
-          "Tests automatizados con Vitest y Husky pre-commit hooks",
+          "Unificación de criterios mediante IA para extracción de datos técnicos",
+          "Asesor inteligente que combina estadísticas con criterio analítico propio",
+          "Análisis de expertos integrado: recopilación de reviews de YouTube y sitios especializados",
+          "Función de Garaje Personal para organizar y comparar vehículos de interés",
+          "Desarrollado y optimizado por agentes de IA (Research, Coding y PM)",
+          "Monitoreo de precios reales obtenidos de múltiples fuentes oficiales en tiempo real",
+          "Arquitectura distribuida: Frontend PWA, Backend escalable y servicios de scraping",
+          "Ecosistema automatizado con procesamiento de imágenes vía Playwright",
         ],
       },
-      vineteca: {
-        title: "Vineteca",
-        subtitle: "E-commerce & gestión para vinoteca",
+      vinoteca: {
+        title: "Vinoteca",
+        subtitle: "E-commerce & gestión inteligente para vinoteca",
         description:
-          "Sistema completo de gestión y venta online para vinoteca, construido con arquitectura moderna. Incluye catálogo con filtros avanzados, carrito de compras, checkout en 3 pasos, panel de administración completo, control de stock multi-depósito, gift cards, blog con editor visual, dashboard con métricas en tiempo real y soporte offline como PWA.",
+          "Sistema completo de gestión y venta online para vinoteca, con un fuerte componente de automatización. Incluye un gestor de redes sociales basado en IA que optimiza la presencia digital de forma autónoma. Todo el ciclo de vida del producto —desde el análisis de requerimientos hasta la UI/UX y el código— fue orquestado por agentes de IA especializados bajo una metodología de Project Management moderna.",
         features: [
+          "Gestor de redes sociales automatizado con IA",
           "Catálogo con filtros avanzados por cepa, bodega y región",
-          "Búsqueda por código de barras",
+          "Proyecto diseñado y programado por agentes de IA especializados",
           "Checkout completo en 3 pasos con descuentos dinámicos",
-          "Panel de administración 100% responsive",
+          "Panel de administración 100% responsive para control total",
           "Control de stock automático por múltiples depósitos",
-          "Gift Cards: compra, canjeo y gestión",
-          "Blog con editor visual/markdown y sistema de eventos",
-          "Dashboard con métricas en tiempo real y gráficos",
+          "Gift Cards: compra, canjeo y gestión centralizada",
+          "Dashboard con métricas en tiempo real y gráficos dinámicos",
           "PWA con actualización automática y soporte offline",
           "Preparado para app móvil nativa con Capacitor",
         ],
@@ -203,13 +204,12 @@ export const translations: Record<Lang, Translations> = {
         title: "Ajedrez IA",
         subtitle: "Ajedrez con inteligencia artificial para Android TV",
         description:
-          "Un proyecto que nació de la necesidad real de un padre ingeniero: no había ninguna app de ajedrez decente en el store de Android TV — todas tenían publicidad invasiva y se veían horribles. Así que construí una desde cero con mi hija de 10 años, aprovechando para enseñarle conceptos de inteligencia artificial mientras jugábamos. Diseñada para controlarse con el D-pad del control remoto, pero también funciona como web responsive en cualquier dispositivo.",
+          "Un proyecto que nació para eliminar la publicidad invasiva del store de Android TV. Construido como una experiencia educativa junto a mi hija, permite jugar contra un bot impulsado por Gemini AI que ajusta su personalidad y nivel de juego. El desarrollo fue un experimento exitoso de ingeniería asistida, utilizando agentes de IA para el análisis de UX, research de motores y tareas de programación complejas.",
         features: [
+          "Juego contra bot inteligente impulsado por Gemini AI",
           "Modo 1 vs 1 local para jugar con alguien en la misma pantalla",
-          "Modo vs IA con niveles de dificultad progresivos",
-          "La IA usa distintos modelos LLM según la dificultad elegida",
-          "Sistema de personalidad: la IA ajusta la calidad de sus movimientos por nivel",
-          "Pensado para que una niña de 10 años aprenda y mejore progresivamente",
+          "La IA ajusta la calidad de sus movimientos por niveles de personalidad",
+          "Diseñado mediante agentes de IA especializados en UX/UI y Coding",
           "Navegación completa con D-pad para control remoto de Android TV",
           "Interfaz limpia sin publicidad, pensada para pantallas grandes",
           "Motor de ajedrez con chess.js para validación de reglas",
@@ -593,9 +593,9 @@ export const translations: Record<Lang, Translations> = {
     projects: {
       autodata: {
         description:
-          "Open vehicle database for the Argentine market with an intelligent purchase advisor.",
+          "Philanthropic platform to democratize access to automotive data in the Argentine market.",
       },
-      vineteca: {
+      vinoteca: {
         description:
           "Complete e-commerce and management system for a wine shop with offline support.",
       },
@@ -607,48 +607,48 @@ export const translations: Record<Lang, Translations> = {
     projectPages: {
       autodata: {
         title: "Autodata",
-        subtitle: "Argentine vehicle database",
+        subtitle: "Democratizing automotive information in Argentina",
         description:
-          "Autodata is a platform that transforms the vehicle buying experience in Argentina. More than a catalog, it works as a personal advisor that uses comprehensive data and intelligent algorithms to offer personalized recommendations, detailed comparisons, and transparent information about pricing, specs, and segments of the local automotive market.",
+          "Autodata is a philanthropic project dedicated to bringing transparency to the national automotive market. It is an ecosystem that utilizes AI models to unify criteria when extracting technical data from various official sources, ensuring precise comparisons. The project was conceptualized and developed entirely through the collaboration of specialized AI agents in UX/UI, research, and programming.",
         features: [
-          "Personalized recommendations based on preferences and budget",
-          "Detailed side-by-side model comparisons",
-          "Complete spec sheets with engine, consumption, and dimension data",
-          "Up-to-date pricing data for new and used vehicles",
-          "Advanced search by segment, brand, and price range",
-          "Backend built with Bun + Express for maximum performance",
-          "Automated tests with Vitest and Husky pre-commit hooks",
+          "AI-driven criteria unification for technical data extraction",
+          "Intelligent advisor merging statistics with proprietary analytical criteria",
+          "Integrated expert analysis: curated YouTube reviews and specialized websites",
+          "Personal Garage feature to organize and compare vehicles of interest",
+          "Developed and optimized by specialized AI agents (Research, Coding, and PM)",
+          "Real-time monitoring of actual prices from multiple official sources",
+          "Distributed architecture: PWA Frontend, scalable Backend, and scraping services",
+          "Automated ecosystem with image processing via Playwright",
         ],
       },
-      vineteca: {
-        title: "Vineteca",
-        subtitle: "E-commerce & wine shop management",
+      vinoteca: {
+        title: "Vinoteca",
+        subtitle: "E-commerce & intelligent management for wine shops",
         description:
-          "Complete e-commerce and management system for a wine shop, built with modern architecture. Includes a catalog with advanced filters, shopping cart, 3-step checkout, full admin panel, multi-warehouse stock control, gift cards, blog with visual editor, real-time metrics dashboard, and offline support as a PWA.",
+          "A complete online sales and management system for wine shops, featuring a strong automation component. It includes an AI-driven social media manager that autonomously optimizes digital presence. The entire product lifecycle —from requirement analysis to UI/UX and code— was orchestrated by specialized AI agents using a modern Project Management methodology.",
         features: [
+          "AI-driven automated social media manager",
           "Catalog with advanced filters by grape, winery, and region",
-          "Barcode search",
+          "Project designed and programmed by specialized AI agents",
           "Complete 3-step checkout with dynamic discounts",
-          "Fully responsive admin panel",
+          "100% responsive admin panel for total control",
           "Automatic multi-warehouse stock control",
-          "Gift cards: purchase, redeem, and management",
-          "Blog with visual/markdown editor and events system",
-          "Real-time metrics dashboard with charts",
+          "Gift Cards: purchase, redeem, and centralized management",
+          "Real-time metrics dashboard with dynamic charts",
           "PWA with automatic updates and offline support",
           "Native mobile app ready with Capacitor",
         ],
       },
       ajedrez: {
         title: "Ajedrez IA",
-        subtitle: "Chess with AI for Android TV",
+        subtitle: "Ajedrez with AI for Android TV",
         description:
-          "A project born from a real need: there wasn't a single decent chess app on the Android TV store — all of them had invasive ads and looked terrible. So I built one from scratch with my 10-year-old daughter, using it as an opportunity to teach her AI concepts while we played. Designed to be fully navigable with the TV remote D-pad, but it also works as a responsive web app on any device.",
+          "A project born to eliminate invasive ads from the Android TV store. Built as an educational experience with my daughter, it features a Gemini AI-powered bot that adjusts its personality and difficulty level. The development was a successful experiment in assisted engineering, utilizing specialized AI agents for UX analysis, engine research, and complex programming tasks.",
         features: [
+          "Intelligent AI opponent powered by Gemini AI",
           "Local 1 vs 1 mode to play with someone on the same screen",
-          "Play vs AI with progressive difficulty levels",
-          "AI uses different LLM models depending on the chosen difficulty",
-          "Personality system: AI adjusts move quality based on level",
-          "Designed for a 10-year-old to learn and improve progressively",
+          "AI adjusts play quality through progressive personality levels",
+          "Designed using specialized AI agents for UI/UX and Coding",
           "Full D-pad navigation for Android TV remote control",
           "Clean ad-free interface designed for big screens",
           "Chess engine with chess.js for rule validation",

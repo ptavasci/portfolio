@@ -88,10 +88,10 @@ export default function Footer({}: FooterProps) {
               </li>
               <li>
                 <Link
-                  to="/project/vineteca"
+                  to="/project/vinoteca"
                   className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-brand-primary transition-colors"
                 >
-                  Vineteca
+                  Vinoteca
                 </Link>
               </li>
               <li>

@@ -96,7 +96,7 @@ describe("i18n", () => {
     });
 
     it("has project pages for all projects", () => {
-      const projectKeys = ["autodata", "vineteca", "ajedrez"] as const;
+      const projectKeys = ["autodata", "vinoteca", "ajedrez"] as const;
       (["es", "en"] as Lang[]).forEach((lang) => {
         projectKeys.forEach((key) => {
           expect(translations[lang].projectPages[key]).toBeDefined();

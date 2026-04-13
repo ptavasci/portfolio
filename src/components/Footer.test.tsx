@@ -24,7 +24,7 @@ describe("Footer", () => {
   it("renders all project links", () => {
     renderFooter();
     expect(screen.getByText("Autodata")).toBeInTheDocument();
-    expect(screen.getByText("Vineteca")).toBeInTheDocument();
+    expect(screen.getByText("Vinoteca")).toBeInTheDocument();
     expect(screen.getByText("Ajedrez IA")).toBeInTheDocument();
   });
 
