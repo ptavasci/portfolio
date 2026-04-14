@@ -28,11 +28,20 @@ export interface ProjectTranslation {
   description: string;
 }
 
+export interface DeepDiveSection {
+  id: string;
+  label: string;
+  title: string;
+  content: string[];
+  image: string;
+}
+
 export interface ProjectPageTranslation {
   title: string;
   subtitle: string;
   description: string;
   features: string[];
+  deepDive?: DeepDiveSection[];
 }
 
 export interface LegalSection {
@@ -90,6 +99,7 @@ export interface Translations {
   projectFeatures: string;
   projectVisit: string;
   backToHome: string;
+  projectDeepDive: string;
   privacyTitle: string;
   privacyLastUpdated: string;
   privacySections: LegalSection[];
