@@ -47,6 +47,7 @@ export const translations: Record<Lang, Translations> = {
     projectFeatures: "Características Principales",
     projectVisit: "Visitar Proyecto",
     backToHome: "Volver al Inicio",
+    projectDeepDive: "En detalle",
     privacyTitle: "Política de Privacidad",
     privacyLastUpdated: "Última actualización",
     privacySections: [
@@ -198,6 +199,56 @@ export const translations: Record<Lang, Translations> = {
           "Dashboard con métricas en tiempo real y gráficos dinámicos",
           "PWA con actualización automática y soporte offline",
           "Preparado para app móvil nativa con Capacitor",
+        ],
+        deepDive: [
+          {
+            id: "product",
+            label: "Producto",
+            title: "Producto: El Sommelier Digital",
+            image: "/screenshots/vinoteca/producto.gif",
+            content: [
+              "Un escaparate digital de élite disponible las 24 horas para guiar y deleitar.",
+              "Catálogo inteligente con filtros avanzados por cepa, bodega y región.",
+              "Checkout simplificado en 3 pasos con descuentos dinámicos por transferencia.",
+              "Widget de WhatsApp integrado para soporte inmediato en cada punto de contacto.",
+            ],
+          },
+          {
+            id: "experience",
+            label: "Operación",
+            title: "Operación Sin Fricciones",
+            image: "/screenshots/vinoteca/dashboard.gif",
+            content: [
+              "Panel de administración 100% responsive para control total desde el móvil.",
+              "Gestión proactiva de stock con alertas de reposición inteligente.",
+              "Gift Cards digitales con códigos QR únicos y sistema de canjeo parcial.",
+              "Órdenes de compra automatizadas que integran el stock al recibir mercadería.",
+            ],
+          },
+          {
+            id: "engineering",
+            label: "Ingeniería",
+            title: "Arquitectura y Resiliencia",
+            image: "/screenshots/vinoteca/ingenieria.gif",
+            content: [
+              "Estructura de 25 tablas relacionales en Supabase con políticas RLS activas.",
+              "Triggers de PostgreSQL para automatización compleja de stock y auditoría.",
+              "PWA de alto rendimiento con caching inteligente y soporte offline total.",
+              "Generación de etiquetas de envío profesionales (10x15) integradas nativamente.",
+            ],
+          },
+          {
+            id: "future",
+            label: "Roadmap",
+            title: "Visión Estratégica (Roadmap)",
+            image: "/screenshots/vinoteca/roadmap.gif",
+            content: [
+              "Pasarelas de Pago Live: Integración directa con el SDK de MercadoPago.",
+              "Club de Vinos: Gestión de suscripciones mensuales y fidelización progresiva.",
+              "Recomendador Sommelier (AI): Motor de IA basado en el perfil del paladar cliente.",
+              "Facturación Electrónica: Emisión directa de facturas A, B y C mediante AFIP.",
+            ],
+          },
         ],
       },
       ajedrez: {
@@ -486,6 +537,7 @@ export const translations: Record<Lang, Translations> = {
     projectFeatures: "Key Features",
     projectVisit: "Visit Project",
     backToHome: "Back to Home",
+    projectDeepDive: "Deep Dive",
     privacyTitle: "Privacy Policy",
     privacyLastUpdated: "Last updated",
     privacySections: [
@@ -637,6 +689,58 @@ export const translations: Record<Lang, Translations> = {
           "Real-time metrics dashboard with dynamic charts",
           "PWA with automatic updates and offline support",
           "Native mobile app ready with Capacitor",
+        ],
+        deepDive: [
+          {
+            id: "product",
+            label: "Product",
+            title: "Product: The Digital Sommelier",
+            image: "https://placehold.co/800x600/722f37/white/png?text=Product",
+            content: [
+              "An elite digital storefront available 24/7 to guide and delight users.",
+              "Intelligent catalog with advanced filters by grape, winery, and region.",
+              "Simplified 3-step checkout with dynamic bank transfer discounts.",
+              "Integrated WhatsApp widget for immediate support at every touchpoint.",
+            ],
+          },
+          {
+            id: "experience",
+            label: "Operation",
+            title: "Seamless Operation",
+            image:
+              "https://placehold.co/800x600/444444/white/png?text=Operation",
+            content: [
+              "100% responsive admin panel for total control from mobile devices.",
+              "Proactive stock management with intelligent replenishment alerts.",
+              "Digital Gift Cards with unique QR codes and partial redemption system.",
+              "Automated purchase orders that integrate stock upon receiving goods.",
+            ],
+          },
+          {
+            id: "engineering",
+            label: "Engineering",
+            title: "Architecture & Resilience",
+            image:
+              "https://placehold.co/800x600/222222/white/png?text=Engineering",
+            content: [
+              "25 relational tables in Supabase with enforced RLS policies.",
+              "PostgreSQL triggers for complex stock automation and sales auditing.",
+              "High-performance PWA with intelligent caching and full offline support.",
+              "Native integration for professional shipping label generation (10x15).",
+            ],
+          },
+          {
+            id: "future",
+            label: "Roadmap",
+            title: "Strategic Vision (Roadmap)",
+            image: "https://placehold.co/800x600/722f37/white/png?text=Roadmap",
+            content: [
+              "Live Payment Gateways: Direct integration with MercadoPago SDK.",
+              "Wine Club: Monthly subscription management and progressive loyalty.",
+              "AI Sommelier Recommender: AI engine based on customer palate profiles.",
+              "Electronic Invoicing: Direct A, B, and C invoice issuance via AFIP.",
+            ],
+          },
         ],
       },
       ajedrez: {
