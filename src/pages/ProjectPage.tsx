@@ -11,6 +11,8 @@ import { useApp } from "../contexts/AppContext";
 import { translations } from "../i18n";
 import { projectsMeta } from "../data";
 
+import ProjectDeepDive from "../components/ProjectDeepDive";
+
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
   const { lang } = useApp();
@@ -237,6 +239,13 @@ export default function ProjectPage() {
           )}
         </div>
       </div>
+
+      {projectTranslation.deepDive && (
+        <ProjectDeepDive
+          sections={projectTranslation.deepDive}
+          title={t.projectDeepDive}
+        />
+      )}
 
       {otherProjects.length > 0 && (
         <section className="py-12 border-t border-zinc-200 dark:border-border-dark">
