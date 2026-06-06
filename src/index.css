@@ -55,6 +55,22 @@ body {
   animation: fade-in-up 0.4s ease-out forwards;
 }
 
+@keyframes pulse-subtle {
+  0%,
+  100% {
+    opacity: 1;
+    background-color: rgba(255, 92, 0, 0.08);
+  }
+  50% {
+    opacity: 0.85;
+    background-color: rgba(255, 92, 0, 0.2);
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s infinite ease-in-out;
+}
+
 .animate-glitch-pulse {
   animation: glitch-pulse 2s infinite ease-in-out;
 }

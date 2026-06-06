@@ -22,12 +22,19 @@ export default function PrivacyPage() {
               {section.title}
             </h2>
             <p>
-              {section.content.includes("{mode_suffix}")
-                ? section.content.replace(
-                    "{mode_suffix}",
-                    isDark ? t.privacyModeSuffixDark : t.privacyModeSuffixLight,
-                  )
-                : section.content}
+              {section.content.includes("{mode_suffix}") ? (
+                <>
+                  {section.content.split("{mode_suffix}")[0]}
+                  <span className="font-semibold text-brand-primary bg-brand-primary/10 px-1.5 py-0.5 rounded inline animate-pulse-subtle hover:bg-brand-primary/20 transition-all duration-300">
+                    {isDark
+                      ? t.privacyModeSuffixDark
+                      : t.privacyModeSuffixLight}
+                  </span>
+                  {section.content.split("{mode_suffix}")[1]}
+                </>
+              ) : (
+                section.content
+              )}
             </p>
             {section.bullets && (
               <ul className="mt-3 space-y-2 ml-4">
