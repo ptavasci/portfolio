@@ -2,7 +2,7 @@ import { useApp } from "../contexts/AppContext";
 import { translations } from "../i18n";
 
 export default function PrivacyPage() {
-  const { lang } = useApp();
+  const { lang, isDark } = useApp();
   const t = translations[lang];
 
   return (
@@ -21,7 +21,14 @@ export default function PrivacyPage() {
             <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
               {section.title}
             </h2>
-            <p>{section.content}</p>
+            <p>
+              {section.content.includes("{mode_suffix}")
+                ? section.content.replace(
+                    "{mode_suffix}",
+                    isDark ? t.privacyModeSuffixDark : t.privacyModeSuffixLight,
+                  )
+                : section.content}
+            </p>
             {section.bullets && (
               <ul className="mt-3 space-y-2 ml-4">
                 {section.bullets.map((bullet: any, bidx: number) => (

@@ -20,6 +20,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return "system";
   });
 
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("theme") as Theme;
+      if (saved === "dark") return true;
+      if (saved === "light") return false;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return false;
+  });
+
   const [lang, setLangState] = useState<Lang>(() => detectLanguage());
 
   /* ── Theme effect ─────────────────────────────────────────────────── */
@@ -28,12 +38,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
     const applyTheme = () => {
-      let isDark = false;
-      if (theme === "dark") isDark = true;
-      else if (theme === "light") isDark = false;
-      else isDark = mediaQuery.matches;
+      let activeDark = false;
+      if (theme === "dark") activeDark = true;
+      else if (theme === "light") activeDark = false;
+      else activeDark = mediaQuery.matches;
 
-      if (isDark) root.classList.add("dark");
+      setIsDark(activeDark);
+      if (activeDark) root.classList.add("dark");
       else root.classList.remove("dark");
     };
 
@@ -57,7 +68,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const setLang = (l: Lang) => setLangState(l);
 
   return (
-    <AppContext.Provider value={{ theme, setTheme, lang, setLang }}>
+    <AppContext.Provider value={{ theme, setTheme, lang, setLang, isDark }}>
       {children}
     </AppContext.Provider>
   );

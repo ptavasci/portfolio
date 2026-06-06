@@ -59,7 +59,7 @@ export const translations: Record<Lang, Translations> = {
       {
         title: "2. ¿Qué datos recopilo?",
         content:
-          "Casi nada. Esta web es estática, no tiene login, no tiene formularios, no tiene base de datos. Es como un folleto digital que resulta que tiene modo oscuro. Sin embargo, utilizo dos herramientas de terceros:",
+          "Casi nada. Esta web es estática, no tiene login, no tiene formularios, no tiene base de datos. Es como un folleto digital que resulta que tiene modo oscuro para gente normal{mode_suffix}. Sin embargo, utilizo dos herramientas de terceros:",
         bullets: [
           "Microsoft Clarity: Registra cómo los usuarios interactúan con el sitio (clics, scrolls, mapas de calor). No recopila datos personales.",
           "Sentry: Monitoreo de errores. Si algo se rompe, quiero saberlo antes que vos. Es una cuestión de orgullo profesional.",
@@ -499,6 +499,9 @@ export const translations: Record<Lang, Translations> = {
         " (en caso de error, el desarrollador se vuelve [[null]] y huye)",
       ],
     },
+    privacyModeSuffixDark: " (como vos y como yo)",
+    privacyModeSuffixLight:
+      " (no como vos, que sos un psicópata usando modo claro y te gusta mirar directo al monitor atentando contra tus pupilas)",
   },
   en: {
     badge: "+25 years in the industry",
@@ -549,7 +552,7 @@ export const translations: Record<Lang, Translations> = {
       {
         title: "2. What data do I collect?",
         content:
-          "Almost nothing. This site is static — no login, no forms, no database. It's basically a brochure that happens to have a dark mode. However, I use two third-party tools:",
+          "Almost nothing. This site is static — no login, no forms, no database. It's basically a brochure that happens to have a dark mode for normal people{mode_suffix}. However, I use two third-party tools:",
         bullets: [
           "Microsoft Clarity: Records how users interact with the site (clicks, scrolls, heatmaps). No personal data collected.",
           "Sentry: Error monitoring. If something breaks, I want to know before you do. It's a matter of professional pride.",
@@ -991,5 +994,8 @@ export const translations: Record<Lang, Translations> = {
         " (in case of error, the dev returns [[null]] and vanishes)",
       ],
     },
+    privacyModeSuffixDark: " (like you and me)",
+    privacyModeSuffixLight:
+      " (unlike you, who are a psychopath using light mode, staring directly into the monitor and assaulting your retinas)",
   },
 };

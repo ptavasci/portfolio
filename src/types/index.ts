@@ -15,6 +15,7 @@ export interface AppContextValue {
   setTheme: (t: Theme) => void;
   lang: Lang;
   setLang: (l: Lang) => void;
+  isDark: boolean;
 }
 
 /* ─── Localization Types ────────────────────────────────────────────── */
@@ -117,6 +118,8 @@ export interface Translations {
   heroScroll: string;
   connectHeadline: string;
   connectSubline: string;
+  privacyModeSuffixDark: string;
+  privacyModeSuffixLight: string;
 }
 
 /* ─── Data Types ────────────────────────────────────────────────────── */

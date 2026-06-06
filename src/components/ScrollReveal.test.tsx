@@ -20,7 +20,7 @@ describe("ScrollReveal", () => {
     );
     const container = screen.getByText("Test content").parentElement;
     expect(container).toHaveClass("opacity-0");
-    expect(container).toHaveClass("translate-y-8");
+    expect(container).toHaveStyle("transform: translateY(32px)");
   });
 
   it("applies custom className", () => {

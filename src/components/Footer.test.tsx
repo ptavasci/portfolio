@@ -31,7 +31,7 @@ describe("Footer", () => {
   it("renders social links", () => {
     renderFooter();
     expect(screen.getByText("GitHub")).toBeInTheDocument();
-    expect(screen.getByText("Instagram")).toBeInTheDocument();
+    expect(screen.getByText("LinkedIn")).toBeInTheDocument();
     expect(screen.getByText("X")).toBeInTheDocument();
   });
 
